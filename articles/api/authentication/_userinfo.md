@@ -1,5 +1,4 @@
 # User Profile
-
 ## Get User Info
 
 ```http
@@ -76,7 +75,7 @@ curl --request GET \
 
 Given the Auth0 <dfn data-key="access-token">Access Token</dfn> obtained during login, this endpoint returns a user's profile.
 
-This endpoint will work only if `openid` was granted as a <dfn data-key="scope">scope</dfn> for the Access Token. The user profile information included in the response depends on the scopes requested. For example, a scope of just `openid` may return less information than a a scope of `openid profile email`.
+This endpoint will work only if `openid` was granted as a <dfn data-key="scope">scope</dfn> for the Access Token. The user profile information included in the response depends on the scopes requested. For example, a scope of just `openid` may return less information than a scope of `openid profile email`.
 
 ### Request Parameters
 
@@ -89,7 +88,7 @@ This endpoint will work only if `openid` was granted as a <dfn data-key="scope">
 
 - The sample auth0.js script uses the library version 8. If you are using auth0.js version 7, please see this [reference guide](/libraries/auth0js/v7).
 - The auth0.js `parseHash` method, requires that your tokens are signed with `RS256`, rather than `HS256`.
-- If you want this endpoint to return `user_metadata` or other custom information, you can use [rules](/rules/guides/metadata). For more information refer to [User profile claims and scope](/api-auth/tutorials/adoption/scope-custom-claims).
+- To return `user_metadata` or other custom information from this endpoint, add a custom claim to the ID token with an [Action](/secure/tokens/json-web-tokens/create-custom-claims#create-custom-claims). For more information refer to [User profile claims and scope](/api-auth/tutorials/adoption/scope-custom-claims).
 - This endpoint will return three HTTP Response Headers, that provide relevant data on its rate limits:
   - `X-RateLimit-Limit`: Number of requests allowed per minute.
   - `X-RateLimit-Remaining`: Number of requests available. Each new request reduces this number by 1. For each minute that passes, requests are added back, so this number increases by 1 each time.
@@ -100,7 +99,7 @@ This endpoint will work only if `openid` was granted as a <dfn data-key="scope">
 - To access the most up-to-date values for the `email` or custom claims, you must get new tokens. You can log in using silent authentication (where the `prompt` parameter for your call to the [`authorize` endpoint](/api/authentication#authorization-code-grant) equals `none`)
 - To access the most up-to-date values for standard claims that were changed using an external IdP (for example, the user changed their email address in Facebook)., you must get new tokens. Log in again using the external IdP, but *not* with silent authentication.
 
-### More Information
+### Learn More
 
 - [Auth0.js v8 Reference: Extract the authResult and get user info](/libraries/auth0js#extract-the-authresult-and-get-user-info)
 

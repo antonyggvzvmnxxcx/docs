@@ -8,7 +8,7 @@ files:
   - files/app
 ---
 
-# Add Login to Your JavaScript App
+# Add Login to Your JavaScript Application
 
 Auth0 allows you to add authentication to almost any application type quickly. This guide demonstrates how to integrate Auth0, add authentication, and display user profile information in a Single-Page Application (SPA) that uses plain JavaScript, using the [Auth0 SPA SDK](https://github.com/auth0/auth0-spa-js).
 
@@ -68,7 +68,7 @@ Sorry about that. Here are a few things to double check:
 - make sure you saved after entering your URLs
 - make sure the Auth0 client has been correctly configured with your Auth0 domain and client ID
 
-Still having issues? To get more help, check out our [documentation](/docs) or visit our [community page](https://community.auth0.com).
+Still having issues? To get more help, check out our [documentation](/) or visit our [community page](https://community.auth0.com).
 
 :::
 ::::
@@ -95,7 +95,7 @@ Sorry about that. Here are a few things to double check:
 - check that the `redirect_uri` option has been configured to your application's URL
 - if you have an `error` query parameter, inspect it to learn the cause of the error
 
-Still having issues? To get more help, check out our [documentation](/docs) or visit our [community page](https://community.auth0.com).
+Still having issues? To get more help, check out our [documentation](/) or visit our [community page](https://community.auth0.com).
 :::
 ::::
 
@@ -128,7 +128,7 @@ Sorry about that. Here are a few things to double check:
 - make sure that you configured the logout URL as one of the **Allowed Logout URLS** in your application's **Settings**
 - inspect the [application logs](https://manage.auth0.com/#/logs) for further errors
 
-Still having issues? To get more help, check out our [documentation](/docs) or visit our [community page](https://community.auth0.com).
+Still having issues? To get more help, check out our [documentation](/) or visit our [community page](https://community.auth0.com).
 :::
 ::::
 
@@ -155,6 +155,6 @@ Sorry about that. Here are a few things to double check:
 - check your code that manages the UI in response to the authentication state
 - inspect the [application logs](https://manage.auth0.com/#/logs) for further errors relating to silent authentication
 
-Still having issues? To get more help, check out our [documentation](/docs) or visit our [community page](https://community.auth0.com).
+Still having issues? To get more help, check out our [documentation](/) or visit our [community page](https://community.auth0.com).
 :::
 ::::

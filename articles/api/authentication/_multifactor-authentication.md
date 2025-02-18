@@ -6,7 +6,7 @@ First, request a challenge based on the challenge types supported by the applica
 
 Next, verify the multi-factor authentication using the `/oauth/token` endpoint and the specified challenge type: a one-time password (OTP), a recovery code, or an out-of-band (OOB) challenge.
 
-For more information, check out:
+To learn more, read:
 
 - [Multi-factor Authentication and Resource Owner Password](/mfa/guides/mfa-api/multifactor-resource-owner-password)
 - [Multi-factor Authentication API](/mfa/concepts/mfa-api)
@@ -62,6 +62,7 @@ Content-Type: application/json
 ```
 
 > RESPONSE SAMPLE FOR OOB WITHOUT BINDING METHOD:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -72,6 +73,7 @@ Content-Type: application/json
 ```
 
 > RESPONSE SAMPLE FOR OOB WITH BINDING METHOD:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -81,13 +83,6 @@ Content-Type: application/json
   "oob_code": "abcde...dasg"
 }
 ```
-
-<%= include('../../_includes/_http-method', {
-  "http_badge": "badge-success",
-  "http_method": "POST",
-  "path": "/mfa/challenge",
-  "link": "#multifactor-authentication"
-}) %>
 
 Request a challenge for <dfn data-key="multifactor-authentication">multi-factor authentication (MFA)</dfn> based on the challenge types supported by the application and user.
 
@@ -104,7 +99,9 @@ If OTP is supported by the user and you don't want to request a different factor
 |:-----------------|:------------|
 | `mfa_token` <br/><span class="label label-danger">Required</span> | The token received from `mfa_required` error. |
 | `client_id` <br/><span class="label label-danger">Required</span> | Your application's Client ID. |
-| `client_secret` | Your application's Client Secret. **Required** when the **Token Endpoint Authentication Method** field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
+| `client_assertion`| A JWT containing a signed assertion with your application credentials. Required when Private Key JWT is your application authentication method.|
+| `client_assertion_type`| The value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method.|
+| `client_secret` | Your application's Client Secret. Required when the Token Endpoint Authentication Method field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
 | `challenge_type` | A whitespace-separated list of the challenges types accepted by your application. Accepted challenge types are `oob` or `otp`. Excluding this parameter means that your client application accepts all supported challenge types. |
 | `authenticator_id` | The ID of the authenticator to challenge. You can get the ID by querying the list of available authenticators for the user as explained on [List authenticators](#list-authenticators) below. |
 
@@ -114,9 +111,9 @@ If OTP is supported by the user and you don't want to request a different factor
 - Auth0 chooses the challenge type based on the application's supported types and types the user is enrolled with.
 - An `unsupported_challenge_type` error is returned if your application does not support any of the challenge types the user has enrolled with.
 - An `unsupported_challenge_type` error is returned if the user is not enrolled.
-- If the user is not enrolled, you will get a `association_required` error, indicating the user needs to enroll to use MFA. Check [Add an authenticator](#add-an-authenticator) below on how to proceed.
+- If the user is not enrolled, you will get a `association_required` error, indicating the user needs to enroll to use MFA. Read [Add an authenticator](#add-an-authenticator) below on how to proceed.
 
-### More information
+### Learn More
 
 * [Authenticate With Resource Owner Password Grant and MFA](/mfa/guides/mfa-api/authenticate)
 * [Manage Authenticator Factors using the MFA API](/mfa/guides/mfa-api/manage)
@@ -159,6 +156,7 @@ request(options, function (error, response, body) {
 ```
 
 > RESPONSE SAMPLE FOR OTP:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -187,12 +185,14 @@ The response is the same as responses for `password` or `http://auth0.com/oauth/
 | Parameter        | Description |
 |:-----------------|:------------|
 | `grant_type` <br/><span class="label label-danger">Required</span> | Denotes the flow you are using. For OTP MFA use  `http://auth0.com/oauth/grant-type/mfa-otp`. |
-| `client_id` <br/><span class="label label-danger">Required</span> | Your application's Client ID. |
-| `client_secret` | Your application's Client Secret. **Required** when the **Token Endpoint Authentication Method** field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
+| `client_id` | Your application's Client ID. |
+| `client_assertion`| A JWT containing a signed assertion with your application credentials. Required when Private Key JWT is your application authentication method.|
+| `client_assertion_type`| The value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method. |
+| `client_secret` | Your application's Client Secret. Required when the Token Endpoint Authentication Method field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
 | `mfa_token` <br/><span class="label label-danger">Required</span> | The `mfa_token` you received from `mfa_required` error. |
 | `otp` <br/><span class="label label-danger">Required</span> | OTP Code provided by the user. |
 
-### More information
+### Learn More
 
 - [Associate OTP Authenticators](/mfa/guides/mfa-api/otp)
 
@@ -235,6 +235,7 @@ request(options, function (error, response, body) {
 ```
 
 > RESPONSE SAMPLE FOR PENDING CHALLENGE:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -245,6 +246,7 @@ Content-Type: application/json
 ```
 
 > RESPONSE SAMPLE FOR VERIFIED CHALLENGE:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -256,6 +258,7 @@ Content-Type: application/json
 ```
 
 > RESPONSE SAMPLE FOR REJECTED CHALLENGE:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -289,12 +292,14 @@ When the challenge response includes a `binding_method: prompt`, your app needs 
 |:-----------------|:------------|
 | `grant_type` <br/><span class="label label-danger">Required</span> | Denotes the flow you are using. For OTP MFA, use  `http://auth0.com/oauth/grant-type/mfa-oob`. |
 | `client_id` <br/><span class="label label-danger">Required</span> | Your application's Client ID. |
-| `client_secret` | Your application's Client Secret. **Required** when the **Token Endpoint Authentication Method** field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
+| `client_assertion`| A JWT containing a signed assertion with your application credentials. Required when Private Key JWT is your application authentication method.|
+| `client_assertion_type`| The value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method.|
+| `client_secret` | Your application's Client Secret. Required when the Token Endpoint Authentication Method field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
 | `mfa_token` <br/><span class="label label-danger">Required</span> | The `mfa_token` you received from `mfa_required` error. |
 | `oob_code` <br/><span class="label label-danger">Required</span> | The oob code received from the challenge request. |
 | `binding_code`| A code used to bind the side channel (used to deliver the challenge) with the main channel you are using to authenticate. This is usually an OTP-like code delivered as part of the challenge message. |
 
-### More information
+### Learn More
 
 - [Associate Out-of-Band Authenticators](/mfa/guides/mfa-api/oob)
 
@@ -336,6 +341,7 @@ request(options, function (error, response, body) {
 ```
 
 > RESPONSE SAMPLE FOR OTP:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -366,7 +372,9 @@ To verify MFA using a recovery code your app must prompt the user for the recove
 |:-----------------|:------------|
 | `grant_type` <br/><span class="label label-danger">Required</span> | Denotes the flow you are using. For recovery code use `http://auth0.com/oauth/grant-type/mfa-recovery-code`. |
 | `client_id` <br/><span class="label label-danger">Required</span> | Your application's Client ID. |
-| `client_secret` | Your application's Client Secret. **Required** when the **Token Endpoint Authentication Method** field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
+| `client_assertion`| A JWT containing a signed assertion with your application credentials. Required when Private Key JWT is your application authentication method.|
+| `client_assertion_type`| The value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method.|
+| `client_secret` | Your application's Client Secret. Required when the Token Endpoint Authentication Method field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
 | `mfa_token` <br/><span class="label label-danger">Required</span> | The `mfa_token` you received from `mfa_required` error. |
 | `recovery_code` <br/><span class="label label-danger">Required</span> | Recovery code provided by the end-user.
 
@@ -418,6 +426,7 @@ request(options, function (error, response, body) {
 ```
 
 > RESPONSE SAMPLE FOR OOB (SMS channel):
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -425,12 +434,13 @@ Content-Type: application/json
   "oob_code": "Fe26.2**da6....",
   "binding_method":"prompt",
   "authenticator_type":"oob",
-  "oob_channel":"sms",
+  "oob_channels":"sms",
   "recovery_codes":["ABCDEFGDRFK75ABYR7PH8TJA"],
 }
 ```
 
 > RESPONSE SAMPLE FOR OOB (Auth0 channel):
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -438,12 +448,13 @@ Content-Type: application/json
   "oob_code": "Fe26.2**da6....",
   "barcode_uri":"otpauth://...",
   "authenticator_type":"oob",
-  "oob_channel":"auth0",
+  "oob_channels":"auth0",
   "recovery_codes":["ABCDEFGDRFK75ABYR7PH8TJA"],
 }
 ```
 
 > RESPONSE SAMPLE FOR OTP:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -480,12 +491,14 @@ To access this endpoint, you must set an Access Token at the Authorization heade
 | Parameter        | Description |
 |:-----------------|:------------|
 | `client_id` <br/><span class="label label-danger">Required</span> | Your application's Client ID. |
-| `client_secret` | Your application's Client Secret. **Required** when the **Token Endpoint Authentication Method** field in your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
+| `client_assertion`| A JWT containing a signed assertion with your application credentials. Required when Private Key JWT is your application authentication method.|
+| `client_assertion_type`| The value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method.|
+| `client_secret` | Your application's Client Secret. Required when the Token Endpoint Authentication Method field in your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. |
 | `authenticator_types` <br/><span class="label label-danger">Required</span> | The type of authenticators supported by the client. Value is an array with values `"otp"` or `"oob"`. |
-| `oob_channel` | The type of OOB channels supported by the client. An array with values `"auth0"`, `"sms"`, `"voice"`. Required if `authenticator_types` include `oob`. |
-| `phone_number` | The phone number to use for SMS or Voice. Required if `oob_channel` includes `sms` or `voice`. |
+| `oob_channels` | The type of OOB channels supported by the client. An array with values `"auth0"`, `"sms"`, `"voice"`. Required if `authenticator_types` include `oob`. |
+| `phone_number` | The phone number to use for SMS or Voice. Required if `oob_channels` includes `sms` or `voice`. |
 
-### More information
+### Learn More
 
 - [Multi-factor Authentication API](/mfa/concepts/mfa-api)
 
@@ -523,6 +536,7 @@ request(options, function (error, response, body) {
 ```
 
 > RESPONSE SAMPLE:
+
 ```JSON
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -535,21 +549,21 @@ Content-Type: application/json
   {
     "id":"sms|dev_gB342kcL2K22S4yB",
     "authenticator_type":"oob",
-    "oob_channel":"sms",
+    "oob_channels":"sms",
     "name":"+X XXXX1234",
     "active":true
   },
   {
     "id":"sms|dev_gB342kcL2K22S4yB",
     "authenticator_type":"oob",
-    "oob_channel":"sms",
+    "oob_channels":"sms",
     "name":"+X XXXX1234",
     "active":false
   },
   {
     "id":"push|dev_433sJ7Mcwj9P794y",
     "authenticator_type":"oob",
-    "oob_channel":"auth0",
+    "oob_channels":"auth0",
     "name":"John's Device",
     "active":true
   },
@@ -560,6 +574,7 @@ Content-Type: application/json
   }
 ]
 ```
+
 <%= include('../../_includes/_http-method', {
   "http_badge": "badge-primary",
   "http_method": "GET",
@@ -580,7 +595,7 @@ To access this endpoint you must set an <dfn data-key="access-token">Access Toke
 | `ACCESS_TOKEN` <br/><span class="label label-danger">Required</span> | The Access Token obtained during login. |
 
 
-#### More information
+#### Learn More
 
 - [Manage Authenticators](/mfa/guides/mfa-api/manage)
 
@@ -616,6 +631,7 @@ request(options, function (error, response, body) {
 ```
 
 > RESPONSE SAMPLE:
+
 ```JSON
 HTTP/1.1 204 OK
 ```
@@ -634,7 +650,6 @@ To access this endpoint, you must set an <dfn data-key="access-token">Access Tok
 - `scope`: `remove:authenticators`
 - `audience`: `https://${account.namespace}/mfa/`
 
-
 ### Request Parameters
 
 | Parameter        | Description |
@@ -642,6 +657,6 @@ To access this endpoint, you must set an <dfn data-key="access-token">Access Tok
 | `ACCESS_TOKEN` <br/><span class="label label-danger">Required</span> | The Access Token obtained during login. |
 | `AUTHENTICATOR_ID` <br/><span class="label label-danger">Required</span> | The ID of the authenticator to delete.
 
-### More information
+### Learn More
 
 - [Manage Authenticators](/mfa/guides/mfa-api/manage)

@@ -13,9 +13,9 @@ topics:
   - react-native
 ---
 
-# Add Login to your React Native App
+# Add Login to Your React Native Application
 
-<!-- markdownlint-disable MD002 MD012 MD041 -->
+<!-- markdownlint-disable MD002 MD012 MD025 MD041 -->
 
 This Quickstart is for the React Native framework. To integrate Auth0 into your Expo application, please refer to the [Expo Quickstart](https://auth0.com/docs/quickstart/native/react-native-expo/interactive)
 
@@ -31,24 +31,26 @@ Any settings you configure using this quickstart will automatically update for y
 
 To explore a complete configuration, review the sample application in your Dashboard.
 
-### Configure Callback URLs
+### Configure callback and logout URLs
 
-A callback URL is the application URL that Auth0 will direct your users to once they have authenticated. If you do not set this value, Auth0 will not return users to your application after they log in.
+Auth0 invokes the callback and logout URLs to redirect users back to your application. Auth0 invokes the callback URL after authenticating the user and the logout URL after removing the session cookie. If you do not set the callback and logout URLs, users will not be able to log in and out of the app, and your application will produce an error.
+
+Add the corresponding URL to **Callback URLs** and **Logout URLs**, according to your app's platform. If you are using a [custom domain](/customize/custom-domains), use the value of your custom domain instead of your Auth0 tenant’s domain.
+
+#### iOS
+```text
+BUNDLE_IDENTIFIER.auth0://${account.namespace}/ios/BUNDLE_IDENTIFIER/callback
+```
+
+#### Android
+```text
+PACKAGE_NAME.auth0://${account.namespace}/android/PACKAGE_NAME/callback
+```
 
 ::: note
 If you are following along with our sample project, set this
-- for iOS - `{PRODUCT_BUNDLE_IDENTIFIER}://${account.namespace}/ios/{PRODUCT_BUNDLE_IDENTIFIER}/callback`
-- for Android - `{YOUR_APP_PACKAGE_NAME}://${account.namespace}/android/{YOUR_APP_PACKAGE_NAME}/callback`
-:::
-
-### Configure Logout URLs
-
-A logout URL is the application URL Auth0 will redirect your users to once they log out. If you do not set this value, users will not be able to log out from your application and will receive an error.
-
-::: note
-If you are following along with our sample project, set this
-- for iOS - `{PRODUCT_BUNDLE_IDENTIFIER}://${account.namespace}/ios/{PRODUCT_BUNDLE_IDENTIFIER}/callback`
-- for Android - `{YOUR_APP_PACKAGE_NAME}://${account.namespace}/android/{YOUR_APP_PACKAGE_NAME}/callback`
+- for iOS - `com.auth0samples.auth0://${account.namespace}/ios/com.auth0samples/callback`
+- for Android - `com.auth0samples.auth0://${account.namespace}/android/com.auth0samples/callback`
 :::
 
 ## Install dependencies 
@@ -77,6 +79,12 @@ npm install react-native-auth0 --save
 
 ### Additional iOS step: install the module Pod
 
+Our SDK requires a minimum iOS deployment target of 13.0. In your project's `ios/Podfile``, ensure your platform target is set to 13.0.
+
+```
+platform :ios '13.0'
+```
+
 CocoaPods is the iOS package management tool the React Native framework uses to install itself into your project. For the iOS native module to work with your iOS app, first install the library Pod. If you're familiar with older React Native SDK versions, this is similar to the previous _linking a native module_. The process is now simplified:
 
 Change directory into the `ios` folder and run `pod install`.
@@ -99,7 +107,7 @@ Open the `build.gradle` file in your application directory (typically at `androi
 android {
     defaultConfig {
         // Add the next line
-        manifestPlaceholders = [auth0Domain: "${account.namespace}", auth0Scheme: "<%= "${applicationId}" %>"]
+        manifestPlaceholders = [auth0Domain: "${account.namespace}", auth0Scheme: "<%= "${applicationId}.auth0" %>"]
     }
     ...
 }
@@ -148,7 +156,7 @@ Below this value, register a URL type entry using the value of `CFBundleIdentifi
         <string>auth0</string>
         <key>CFBundleURLSchemes</key>
         <array>
-            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+            <string>$(PRODUCT_BUNDLE_IDENTIFIER).auth0</string>
         </array>
     </dict>
 </array>
@@ -195,7 +203,7 @@ If your application did not launch successfully:
 Still having issues? Check out our [documentation](https://auth0.com/docs) or visit our [community page](https://community.auth0.com) to get more help.
 :::
 ::::
-## Add login to your app {{{ data-action=code data-code="app.js#8:14" }}}
+## Add login to your application {{{ data-action=code data-code="app.js#8:14" }}}
 
 Authenticate the user by calling the `authorize` method provided by the `useAuth0` hook. This method redirects the user to the Auth0 [Universal Login](https://auth0.com/docs/authenticate/login/auth0-universal-login) page for authentication, then back to your app.
 
@@ -217,7 +225,7 @@ Still having issues? Check out our [documentation](https://auth0.com/docs) or vi
 :::
 ::::
 
-## Add logout to your app {{{ data-action=code data-code="app.js#16:22" }}}
+## Add logout to your application {{{ data-action=code data-code="app.js#16:22" }}}
 
 To log the user out, redirect them to the Auth0 log out endpoint by calling `clearSession`. This will remove their session from the authorization server and log the user out of the application.
 
@@ -235,7 +243,7 @@ Still having issues? Check out our [documentation](https://auth0.com/docs) or vi
 :::
 ::::
 
-## Show user profile information {{{ data-action=code data-code="app.js#28:29" }}}
+## Show user profile information {{{ data-action=code data-code="app.js#32:34" }}}
 
 The `useAuth0` hook exposes a `user` object that contains information about the authenticated user. You can use this to access decoded user profile information about the authenticated user from the [ID token](https://auth0.com/docs/secure/tokens/id-tokens).
 

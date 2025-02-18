@@ -90,7 +90,9 @@ You have three options for [passwordless authentication](/connections/passwordle
 | Parameter        | Description |
 |:-----------------|:------------|
 | `client_id` <br/><span class="label label-danger">Required</span> | The `client_id` of your application. |
-| `client_secret` <br/><span class="label label-danger">Required</span> | The `client_secret` of your application. Required for Regular Web Applications **only**. |
+| `client_assertion` <br/>| A JWT containing containing a signed assertion with your applications credentials. Required when Private Key JWT is your application authentication method. |
+|`client_assertion_type`| Use the value `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method.|
+| `client_secret` | The `client_secret` of your application. Required when the Token Endpoint Authentication Method field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`. Specifically required for Regular Web Applications **only**. |
 | `connection` <br/><span class="label label-danger">Required</span> | How to send the code/link to the user. Use `email` to send the code/link using email, or `sms` to use SMS. |
 | `email` | Set this to the user's email address, when `connection=email`. |
 | `phone_number` | Set this to the user's phone number, when `connection=sms`. |
@@ -108,7 +110,7 @@ You have three options for [passwordless authentication](/connections/passwordle
 
 For the complete error code reference for this endpoint refer to [Errors > POST /passwordless/start](#post-passwordless-start).
 
-### More Information
+### Learn More
 
 - [Passwordless Authentication](/connections/passwordless)
 - [Passwordless Best Practices](/connections/passwordless/best-practices)
@@ -126,7 +128,8 @@ Content-Type: application/json
   "realm": "email|sms" //email or sms
   "username":"USER_EMAIL|USER_PHONE_NUMBER", // depends on which realm you chose
   "audience" : "API_IDENTIFIER", // in case you need an access token for a specific API
-  "scope": "SCOPE"
+  "scope": "SCOPE",
+  "redirect_uri": "REDIRECT_URI"
 }
 ```
 
@@ -134,7 +137,7 @@ Content-Type: application/json
 curl --request POST \
   --url 'https://${account.namespace}/oauth/token' \
   --header 'content-type: application/json' \
-  --data '{"grant_type":"http://auth0.com/oauth/grant-type/passwordless/otp", "client_id":"${account.clientId}", "client_secret":"CLIENT_SECRET", "otp":"CODE", "realm":"email|sms", "username":"USER_EMAIL|USER_PHONE_NUMBER", "audience":"API_IDENTIFIER", "scope":"SCOPE"}'
+  --data '{"grant_type":"http://auth0.com/oauth/grant-type/passwordless/otp", "client_id":"${account.clientId}", "client_secret":"CLIENT_SECRET", "otp":"CODE", "realm":"email|sms", "username":"USER_EMAIL|USER_PHONE_NUMBER", "audience":"API_IDENTIFIER", "scope":"SCOPE", "redirect_uri": "REDIRECT_URI"}'
 ```
 
 ```javascript
@@ -195,29 +198,21 @@ Once you have a verification code, use this endpoint to login the user with thei
 |:-----------------|:------------|
 | `grant_type` <br/><span class="label label-danger">Required</span> | It should be `http://auth0.com/oauth/grant-type/passwordless/otp`. |
 | `client_id` <br/><span class="label label-danger">Required</span> | The `client_id` of your application. |
-| `client_secret` <br/><span class="label label-danger">Required</span> | The `client_secret` of your application. Only required for Regular Web Applications. |
+| `client_assertion`| A JWT containing a signed assertion with your application credentials. Required when Private Key JWT is your application authentication method.|
+| `client_assertion_type`| The value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  Required when Private Key JWT is the application authentication method.|
+| `client_secret` | The `client_secret` of your application. Required** when the Token Endpoint Authentication Method field at your [Application Settings](${manage_url}/#/applications) is `Post` or `Basic`.  Specifically required for Regular Web Applications **only**. |
 | `username` <br/><span class="label label-danger">Required</span> | The user's phone number if `realm=sms`, or the user's email if `realm=email`. |
 | `realm` <br/><span class="label label-danger">Required</span> | Use `sms` or `email` (should be the same as [POST /passwordless/start](#get-code-or-link)) |
 | `otp` <br/><span class="label label-danger">Required</span> | The user's verification code.  |
 | <dfn data-key="audience">`audience`</dfn> | API Identifier of the API for which you want to get an Access Token. |
 | <dfn data-key="scope">`scope`</dfn> | Use `openid` to get an ID Token, or `openid profile email` to also include user profile information in the ID Token. |
-
-
-### Test with Authentication API Debugger
-
-<%= include('../../_includes/_test-this-endpoint') %>
-
-1. At the *Configuration* tab, set the fields **Application** (select the application you want to use for the test) and **Connection** (use `sms` or `email`).
-
-1. Copy the <dfn data-key="callback">**Callback URL**</dfn> and set it as part of the **Allowed Callback URLs** of your [Application Settings](${manage_url}/#/applications).
-
-1. At the *OAuth2 / OIDC* tab, set **Username** to the user's phone number if `connection=sms`, or the user's email if `connection=email`, and **Password** to the user's verification code. Click **Resource Owner Endpoint**.
+| `redirect_uri` <br/><span class="label label-danger">Required</span> | A callback URL that has been registered with your application's **Allowed Callback URLs**. |
 
 ### Error Codes
 
 For the complete error code reference for this endpoint refer to [Standard Error Responses](#standard-error-responses). 
 
-### More Information
+### Learn More
 
 - [Passwordless Authentication](/connections/passwordless)
 
@@ -245,17 +240,6 @@ Once you have a verification code, use this endpoint to login the user with thei
 | `password` <br/><span class="label label-danger">Required</span> | The user's verification code.  |
 | <dfn data-key="scope">`scope`</dfn> | Use `openid` to get an ID Token, or `openid profile email` to include also user profile information in the ID Token. |
 
-
-### Test with Authentication API Debugger
-
-<%= include('../../_includes/_test-this-endpoint') %>
-
-1. At the *Configuration* tab, set the fields **Application** (select the application you want to use for the test) and **Connection** (use `sms` or `email`).
-
-1. Copy the <dfn data-key="callback">**Callback URL**</dfn> and set it as part of the **Allowed Callback URLs** of your [Application Settings](${manage_url}/#/applications).
-
-1. At the *OAuth2 / OIDC* tab, set **Username** to the user's phone number if `connection=sms`, or the user's email if `connection=email`, and **Password** to the user's verification code. Click **Resource Owner Endpoint**.
-
 ### Remarks
 
 - The `profile` <dfn data-key="scope">scope</dfn> value requests access to the End-User's default profile Claims, which are: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`, `picture`, `website`, `gender`, `birthdate`, `zoneinfo`, `locale`, and `updated_at`.
@@ -266,7 +250,7 @@ Once you have a verification code, use this endpoint to login the user with thei
 
 For the complete error code reference for this endpoint refer to [Errors > POST /passwordless/verify](#post-passwordless-verify).
 
-### More Information
+### Learn More
 
 - [Passwordless Best Practices](/connections/passwordless/best-practices)
 
