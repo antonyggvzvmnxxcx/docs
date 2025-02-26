@@ -1,4 +1,5 @@
 # Signup
+<!-- markdownlint-disable MD001 MD012 MD012 -->
 
 ```http
 POST https://${account.namespace}/dbconnections/signup
@@ -76,7 +77,7 @@ curl --request POST \
   "link": "#signup"
 }) %>
 
-Given a user's credentials, and a `connection`, this endpoint will create a new user using active authentication.
+Given a user's credentials and a `connection`, this endpoint creates a new user.
 
 This endpoint only works for database connections. 
 
@@ -85,7 +86,7 @@ This endpoint only works for database connections.
 
 | Parameter        | Description |
 |:-----------------|:------------|
-| `client_id` <br/><span class="label label-danger">Required</span> | The `client_id` of your client. |
+| `client_id` | The `client_id` of your client. |
 | `email` <br/><span class="label label-danger">Required</span> | The user's email address. |
 | `password` <br/><span class="label label-danger">Required</span> | The user's desired password. |
 | `connection` <br/><span class="label label-danger">Required</span> | The name of the database configured to your client. |
@@ -102,7 +103,7 @@ This endpoint only works for database connections.
 - The sample auth0.js script uses the library version 8. If you are using auth0.js version 7, please see this [reference guide](/libraries/auth0js/v7).
 
 
-### More Information
+### Learn More
 
 - [Password Strength in Auth0 Database Connections](/connections/database/password-strength)
 - [Password Options in Auth0 Database Connections](/connections/database/password-options)

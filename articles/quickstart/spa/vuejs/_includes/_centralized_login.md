@@ -2,7 +2,7 @@
 
 ## Install the SDK
 
-Install the [Auth0 Vue SDK](https://github.com/auth0/auth0-vue) using npm:
+Install the <a href="https://github.com/auth0/auth0-vue" target="_blank" rel="noreferrer">Auth0 Vue SDK</a> using npm:
 
 ```bash
 npm install @auth0/auth0-vue
@@ -20,15 +20,17 @@ const app = createApp(App);
 app.use(
   createAuth0({
     domain: "${account.namespace}",
-    client_id: "${account.clientId}",
-    redirect_uri: window.location.origin
+    clientId: "${account.clientId}",
+    authorizationParams: {
+      redirect_uri: window.location.origin
+    }
   })
 );
 
 app.mount('#app');
 ```
 
-The plugin will register the SDK using both `provide` and `app.config.globalProperties`, allowing the SDK to be used with both the [Composition API](https://v3.vuejs.org/guide/composition-api-introduction.html) and [Options API](https://vuejs.org/guide/introduction.html#options-api).
+The plugin will register the SDK using both `provide` and `app.config.globalProperties`, allowing the SDK to be used with both the <a href="https://v3.vuejs.org/guide/composition-api-introduction.html" target="_blank" rel="noreferrer">Composition API</a> and <a href="https://vuejs.org/guide/introduction.html#options-api" target="_blank" rel="noreferrer">Options API</a>.
 
 ## Add Login to Your Application
 
@@ -98,7 +100,7 @@ Use the `logout` function that is exposed on the return value of `useAuth0`, whi
 
       return {
         logout: () => {
-          logout({ returnTo: window.location.origin });
+          logout({ logoutParams: { returnTo: window.location.origin } });
         }
       };
     }
@@ -126,7 +128,7 @@ If you're using the Options API, you can use the same `logout` method from the g
   export default {
     methods: {
       logout() {
-        this.$auth0.logout({ returnTo: window.location.origin });
+        this.$auth0.logout({ logoutParams: { returnTo: window.location.origin } });
       }
     }
   };

@@ -8,7 +8,7 @@ topics:
   - aspnet-owin
   - login
 github:
-  path: Quickstart/02-User-Profile
+  path: Quickstart/Sample
 contentType: tutorial
 useCase: quickstart
 interactive: true
@@ -39,12 +39,12 @@ Install-Package Microsoft.Owin.Security.Cookies
 ```
 
 :::note
-Issues occur when configuring the OWIN cookie middleware and System.Web cookies at the same time. To learn more, read [System.Web cookie integration issues doc](https://github.com/aspnet/AspNetKatana/wiki/System.Web-response-cookie-integration-issues) to mitigate these problems.
+Issues occur when configuring the OWIN cookie middleware and System.Web cookies at the same time. To learn more, read <a href="https://github.com/aspnet/AspNetKatana/wiki/System.Web-response-cookie-integration-issues" target="_blank" rel="noreferrer">System.Web cookie integration issues doc</a> to mitigate these problems.
 :::
 
 ### Configure the credentials
 For the SDK to function properly, set the following properties in `Web.config`:
-- `auth0:Domain`: The domain of your Auth0 tenant. You can find this in the Auth0 Dashboard under your application's **Settings** in the Domain field. If you are using a [custom domain](https://auth0.com/docs/custom-domains), set this to the value of your custom domain instead.
+- `auth0:Domain`: The domain of your Auth0 tenant. You can find this in the Auth0 Dashboard under your application's **Settings** in the Domain field. If you are using a <a href="https://auth0.com/docs/custom-domains" target="_blank" rel="noreferrer">custom domain</a>, set this to the value of your custom domain instead.
 - `auth0:ClientId`: The ID of the Auth0 application you created in Auth0 Dashboard. You can find this in the Auth0 Dashboard under your application's **Settings** in the Client ID field.
 
 ## Configure the middleware {{{ data-action=code data-code="Startup.cs#9:13" }}}
@@ -53,33 +53,33 @@ To enable authentication in your ASP.NET OWIN application, go to the `Configurat
 
 It is essential that you register both the cookie middleware and the OpenID Connect middleware as both are required (in that order) for authentication to work. The OpenID Connect middleware handles the authentication with Auth0. Once users have authenticated, their identity is stored in the cookie middleware.
 
-In the code snippet, `AuthenticationType` is set to **Auth0**. Use `AuthenticationType` in the next section to challenge the OpenID Connect middleware and start the authentication flow. `RedirectToIdentityProvider` notification event constructs the correct [logout URL](/logout).
+In the code snippet, `AuthenticationType` is set to **Auth0**. Use `AuthenticationType` in the next section to challenge the OpenID Connect middleware and start the authentication flow. `RedirectToIdentityProvider` notification event constructs the correct <a href="/logout" target="_blank" rel="noreferrer">logout URL</a>.
 
-## Add login to your application {{{ data-action=code data-code="AccountController.cs#7:16" }}}
+## Add login to your application {{{ data-action=code data-code="AccountController.cs#6:15" }}}
 
-To allow users to login to your ASP.NET OWIN application, add a `Login` action to your controller.
+To allow users to log in to your ASP.NET OWIN application, add a `Login` action to your controller.
 
 Call `HttpContext.GetOwinContext().Authentication.Challenge` and pass `"Auth0"` as the authentication scheme. This invokes the OIDC authentication handler that was registered earlier. Be sure to specify the corresponding `AuthenticationProperties`, including a `RedirectUri`.
 
-After succesfully calling `HttpContext.GetOwinContext().Authentication.Challenge`, the user redirects to Auth0 and signed in to both the OIDC middleware and the cookie middleware upon being redirected back to your application. This will allow the users to be authenticated on subsequent requests.
+After successfully calling `HttpContext.GetOwinContext().Authentication.Challenge`, the user redirects to Auth0 and signed in to both the OIDC middleware and the cookie middleware upon being redirected back to your application. This will allow the users to be authenticated on subsequent requests.
 
 ::::checkpoint
 
 :::checkpoint-default
 
 Now that you have configured Login, run your application to verify that:
-* Navigating to your `Login` action will redirects to Auth0
+* Navigating to your `Login` action will redirect to Auth0
 * Entering your credentials will redirect you back to your application.
 
 :::
 
 :::checkpoint-failure
-Sorry about that. Here's a couple things to double check:
+Sorry about that. Here are a couple of things to double-check:
 * make sure the correct application is selected
 * did you save after entering your URLs?
 * make sure the domain and client ID are configured correctly
 
-Still having issues? Check out our [documentation](https://auth0.com/docs) or visit our [community page](https://community.auth0.com) to get more help.
+Still having issues? Check out our <a href="https://auth0.com/docs" target="_blank" rel="noreferrer">documentation</a> or visit our <a href="https://community.auth0.com" target="_blank" rel="noreferrer">community page</a> to get more help.
 
 :::
 
@@ -89,7 +89,7 @@ Still having issues? Check out our [documentation](https://auth0.com/docs) or vi
 
 From your controller's action, call `HttpContext.GetOwinContext().Authentication.SignOut` with the `CookieAuthenticationDefaults.AuthenticationType` authentication scheme to log the user out of your application.
 
-Additionaly, if you want to log the user out from Auth0 (this *might* also log them out of other applications that rely on Single Sign-On), call `HttpContext.GetOwinContext().Authentication.SignOut` with the `"Auth0"` authentication scheme.
+Additionally, if you want to log the user out from Auth0 (this *might* also log them out of other applications that rely on Single Sign-On), call `HttpContext.GetOwinContext().Authentication.SignOut` with the `"Auth0"` authentication scheme.
 
 ::::checkpoint
 
@@ -97,17 +97,17 @@ Additionaly, if you want to log the user out from Auth0 (this *might* also log t
 
 Now that you have configured Logout, run your application to verify that:
 * Navigating to your `Logout` action ensures the user is logged out.
-* Duing logout, you redirect to Auth0 and instantly redirect back to your own application during log out.
+* During logout, you redirect to Auth0 and instantly redirect back to your application during log out.
 
 :::
 
 :::checkpoint-failure
-Sorry about that. Here's a couple things to double check:
+Sorry about that. Here are a couple of things to double-check:
 * make sure the correct application is selected
 * did you save after entering your URLs?
 * make sure the domain and client ID are configured correctly
 
-Still having issues? Check out our [documentation](https://auth0.com/docs) or visit our [community page](https://community.auth0.com) to get more help.
+Still having issues? Check out our <a href="https://auth0.com/docs" target="_blank" rel="noreferrer">documentation</a> or visit our <a href="https://community.auth0.com" target="_blank" rel="noreferrer">community page</a> to get more help.
 
 :::
 
@@ -124,17 +124,17 @@ To create a user profile, retrieve a user's name, email address, and profile ima
 :::checkpoint-default
 
 Now that you have set up your action to render the user's profile, run your application to verify that:
-* Navigating to your `Profile` action after being succesfully logged in, shows the user's profile.
+* Navigating to your `Profile` action after being successfully logged in, shows the user's profile.
 
 :::
 
 :::checkpoint-failure
-Sorry about that. Here's a couple things to double check:
+Sorry about that. Here are a couple things to double-check:
 * make sure the correct application is selected
 * make sure the domain and client ID are configured correctly
 * Did you set `openid profile email` as the scope?
 
-Still having issues? Check out our [documentation](https://auth0.com/docs) or visit our [community page](https://community.auth0.com) to get more help.
+Still having issues? Check out our <a href="https://auth0.com/docs" target="_blank" rel="noreferrer">documentation</a> or visit our <a href="https://community.auth0.com" target="_blank" rel="noreferrer">community page</a> to get more help.
 
 :::
 

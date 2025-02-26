@@ -23,13 +23,13 @@ useCase: quickstart
 
 The Callback URL of your application is the URL where Auth0 will redirect to after the user has authenticated in order for the SDK to complete the authentication process.
 
-You will need to add this URL to the list of Allowed URLs for your application in your [Application Settings](${manage_url}/#/applications), this URL will mostly take the format `https://YOUR_APPLICATION_URL/callback`.
+You will need to add this URL to the list of Allowed URLs for your application in your <a href="$manage_url/#/applications" target="_blank" rel="noreferrer">Application Settings</a>, this URL will mostly take the format `https://YOUR_APPLICATION_URL/callback`.
 
 <%= include('../../../_includes/_logout_url', { returnTo: 'http://localhost:3000' }) %>
 
 ## Integrate Auth0
 
-[Universal Login](/hosted-pages/login) is the easiest way to set up authentication in your application. We recommend using it for the best experience, best security and the fullest array of features. This guide will use it to provide a way for your users to log in to your ASP.NET Core application.
+<a href="/hosted-pages/login" target="_blank" rel="noreferrer">Universal Login</a> is the easiest way to set up authentication in your application. We recommend using it for the best experience, best security and the fullest array of features. This guide will use it to provide a way for your users to log in to your ASP.NET Core application.
 
 ### Install dependencies
 
@@ -41,44 +41,38 @@ Install-Package Auth0.AspNetCore.Authentication
 
 ### Install and configure the SDK
 
-To enable authentication in your ASP.NET Core application, use the middleware provided by the SDK. Go to the `ConfigureServices` method of your `Startup` class and call `services.AddAuth0WebAppAuthentication()` to configure the Auth0 ASP.NET Core SDK.
+To enable authentication in your ASP.NET Core application, use the middleware provided by the SDK. Go to the `Program.cs` file and call `builder.Services.AddAuth0WebAppAuthentication()` to configure the Auth0 ASP.NET Core SDK.
 
 Ensure to configure the `Domain` and `ClientId`, these are required fields to ensure the SDK knows which Auth0 tenant and application it should use.
 
 ```cs
-public void ConfigureServices(IServiceCollection services)
+var builder = WebApplication.CreateBuilder(args);
+// Cookie configuration for HTTP to support cookies with SameSite=None
+builder.Services.ConfigureSameSiteNoneCookies();
+
+// Cookie configuration for HTTPS
+//  builder.Services.Configure<CookiePolicyOptions>(options =>
+//  {
+//     options.MinimumSameSitePolicy = SameSiteMode.None;
+//  });
+builder.Services.AddAuth0WebAppAuthentication(options =>
 {
-    // Cookie configuration for HTTP to support cookies with SameSite=None
-    services.ConfigureSameSiteNoneCookies();
-
-    // Cookie configuration for HTTPS
-    // services.Configure<CookiePolicyOptions>(options =>
-    // {
-    //    options.MinimumSameSitePolicy = SameSiteMode.None;
-    // });
-
-    services
-        .AddAuth0WebAppAuthentication(options => {
-            options.Domain = Configuration["Auth0:Domain"];
-            options.ClientId = Configuration["Auth0:ClientId"];
-        });
-
-    services.AddControllersWithViews();
-}
+    options.Domain = builder.Configuration["Auth0:Domain"];
+    options.ClientId = builder.Configuration["Auth0:ClientId"];
+});
+builder.Services.AddControllersWithViews();
+var app = builder.Build();
 ```
 
 ::: note
-The `ConfigureSameSiteNoneCookies` method used above was added as part of the [sample application](https://github.com/auth0-samples/auth0-aspnetcore-mvc-samples/blob/master/Quickstart/Sample/Support/SameSiteServiceCollectionExtensions.cs) in order to ([make cookies with SameSite=None work over HTTP when using Chrome](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)). We recommend using HTTPS instead of HTTP, which removes the need for the `ConfigureSameSiteNoneCookies` method.
+The `ConfigureSameSiteNoneCookies` method used above was added as part of the <a href="https://github.com/auth0-samples/auth0-aspnetcore-mvc-samples/blob/master/Quickstart/Sample/Support/SameSiteServiceCollectionExtensions.cs" target="_blank" rel="noreferrer">sample application</a> in order to (<a href="https://blog.chromium.org/2019/10/developers-get-ready-for-new.html" target="_blank" rel="noreferrer">make cookies with SameSite=None work over HTTP when using Chrome</a>). We recommend using HTTPS instead of HTTP, which removes the need for the `ConfigureSameSiteNoneCookies` method.
 :::
 
-Make sure you have enabled authentication and authorization in your `Startup.Configure` method:
+Make sure you have enabled authentication and authorization in your Program.cs file:
 
 ```csharp
-public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-{
-    app.UseAuthentication();
-    app.UseAuthorization();
-}
+app.UseAuthentication();
+app.UseAuthorization();
 ```
 
 ## Login
@@ -161,6 +155,6 @@ public class AccountController : Controller
 
 We put together a few examples of how to use the SDK in more advanced use cases:
 
-- [Configuring Scopes](https://github.com/auth0/auth0-aspnetcore-authentication/blob/main/EXAMPLES.md#scopes)
-- [Obtain an Access Token for Calling an API](https://github.com/auth0/auth0-aspnetcore-authentication/blob/main/EXAMPLES.md#calling-an-api)
-- [Adding Role-based authorization](https://github.com/auth0/auth0-aspnetcore-authentication/blob/main/EXAMPLES.md#roles)
+- <a href="https://github.com/auth0/auth0-aspnetcore-authentication/blob/main/EXAMPLES.md#scopes" target="_blank" rel="noreferrer">Configuring Scopes</a>
+- <a href="https://github.com/auth0/auth0-aspnetcore-authentication/blob/main/EXAMPLES.md#calling-an-api" target="_blank" rel="noreferrer">Obtain an Access Token for Calling an API</a>
+- <a href="https://github.com/auth0/auth0-aspnetcore-authentication/blob/main/EXAMPLES.md#roles" target="_blank" rel="noreferrer">Adding Role-based authorization</a>

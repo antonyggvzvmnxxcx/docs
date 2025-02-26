@@ -55,12 +55,17 @@ const redirects = [
     to: '/',
   },
   {
+    from: ['/contentful-test-1', '/contentful-test-2', '/contentful-test-3', '/contentful-test-4'],
+    to: '/',
+  },
+  {
     from: [
       '/design/browser-based-vs-native-experience-on-mobile',
       '/tutorials/browser-based-vs-native-experience-on-mobile',
       '/best-practices/mobile-device-login-flow-best-practices',
+      '/get-started/authentication-and-authorization-flow/mobile-device-login-flow-best-practices',
     ],
-    to: '/get-started/authentication-and-authorization-flow/mobile-device-login-flow-best-practices',
+    to: '/get-started/authentication-and-authorization-flow/device-authorization-flow/mobile-device-login-flow-best-practices',
   },
   {
     from: '/topics/identity-glossary',
@@ -309,6 +314,14 @@ const redirects = [
     to: '/quickstart/native/xamarin',
   },
   {
+    from: '/quickstart/native/xamarin',
+    to: '/quickstart/native/net-android-ios',
+  },
+  {
+    from: '/quickstart/native/xamarin/interactive',
+    to: '/quickstart/native/net-android-ios/interactive',
+  },
+  {
     from: '/quickstart/spa/auth0-react/02',
     to: '/quickstart/spa/react/02-calling-an-api',
   },
@@ -333,11 +346,12 @@ const redirects = [
       '/quickstart/backend/aspnet-core-webapi/06-authorization-deprecated',
       '/quickstart/backend/aspnet-core-webapi/06-authorization-legacy',
       '/quickstart/backend/aspnet-core-webapi/00-getting-started',
+      '/quickstart/backend/aspnet-core-webapi-2',
     ],
     to: '/quickstart/backend/aspnet-core-webapi',
   },
   {
-    from: '/quickstart/webapp/aspnet-core-3',
+    from: ['/quickstart/webapp/aspnet-core-3', '/quickstart/webapp/aspnet-core-2'],
     to: '/quickstart/webapp/aspnet-core',
   },
   {
@@ -390,6 +404,10 @@ const redirects = [
       '/quickstart/webapp/nodejs/01-login',
     ],
     to: '/quickstart/webapp/express',
+  },
+  {
+    from: ['/quickstart/native/cordova'],
+    to: '/quickstart',
   },
 
   /* CONNECTIONS */
@@ -474,8 +492,9 @@ const redirects = [
       '/protocols/configure-okta-as-oauth2-identity-provider',
       '/authorization/protocols/configure-okta-as-oauth2-identity-provider',
       '/connections/social/configure-okta-as-oauth2-identity-provider',
+      '/authenticate/identity-providers/social-identity-providers/configure-okta-as-oauth2-identity-provider',
     ],
-    to: '/authenticate/identity-providers/social-identity-providers/configure-okta-as-oauth2-identity-provider',
+    to: '/authenticate/identity-providers/enterprise-identity-providers/okta',
   },
   {
     from: ['/connections/social/auth0-oidc', '/connections/enterprise/oidc'],
@@ -943,22 +962,61 @@ const redirects = [
     from: ['/connections/database/custom-db/error-handling'],
     to: '/authenticate/database-connections/custom-db/error-handling',
   },
+  {
+    from: [`/authenticate/database-connections/test-custom-db`],
+    to: `/authenticate/database-connections/custom-db/test-custom-database-connections`,
+  },
 
   /* MICROSITES */
+  {
+    from: ['/microsites/call-api/call-api-m2m-app'],
+    to: '/get-started/authentication-and-authorization-flow/client-credentials-flow',
+  },
+  {
+    from: ['/microsites/add-login/add-login-native-mobile-app'],
+    to: '/quickstart/native',
+  },
+  {
+    from: ['/microsites/add-login/add-login-regular-web-app'],
+    to: '/quickstart/webapp',
+  },
+  {
+    from: ['/microsites/add-login/add-login-single-page-app'],
+    to: '/quickstart/spa',
+  },
+  {
+    from: ['/microsites/call-api/call-api-device'],
+    to: '/get-started/authentication-and-authorization-flow/device-authorization-flow/call-your-api-using-the-device-authorization-flow',
+  },
+  {
+    from: ['/microsites/call-api/call-api-native-mobile-app'],
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/call-your-api-using-the-authorization-code-flow-with-pkce',
+  },
+  {
+    from: ['/microsites/call-api/call-api-regular-web-app'],
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow/call-your-api-using-the-authorization-code-flow',
+  },
+  {
+    from: ['/microsites/call-api/call-api-single-page-app'],
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/call-your-api-using-the-authorization-code-flow-with-pkce',
+  },
+  {
+    from: ['/microsites/manage-users/define-maintain-custom-user-data'],
+    to: '/manage-users/user-accounts/metadata',
+  },
+  {
+    from: ['/microsites/manage-users/manage-users-and-user-profiles'],
+    to: '/manage-users/user-accounts/metadata',
+  },
 
   /* ARCHITECTURE SCENARIOS */
 
   {
-    from: [
-      '/architecture-scenarios',
-    ],
+    from: ['/architecture-scenarios'],
     to: '/get-started/architecture-scenarios',
   },
   {
-    from: [
-      '/architecture-scenarios/application/mobile-api',
-      '/architecture-scenarios/mobile-api'
-    ],
+    from: ['/architecture-scenarios/application/mobile-api', '/architecture-scenarios/mobile-api'],
     to: '/get-started/architecture-scenarios/mobile-api',
   },
   {
@@ -1573,9 +1631,8 @@ const redirects = [
     to: '/get-started/applications/application-grant-types',
   },
   {
-    from: [`/get-started/applications/how-to-rotate-application-secret`],
-    to: `/get-started/applications/rotate-client-secret`,
-
+    from: ['/get-started/applications/how-to-rotate-application-secret'],
+    to: '/get-started/applications/rotate-client-secret',
   },
   {
     from: [
@@ -1605,7 +1662,7 @@ const redirects = [
       '/get-started/dashboard/rotate-client-secret',
       '/applications/rotate-client-secret',
       '/configure/applications/rotate-client-secret',
-      '/applications/how-to-rotate-application-secret'
+      '/applications/how-to-rotate-application-secret',
     ],
     to: '/get-started/applications/rotate-client-secret',
   },
@@ -1653,6 +1710,10 @@ const redirects = [
       '/configure/applications/configure-ws-fed-applications',
     ],
     to: '/get-started/applications/update-application-connections',
+  },
+  {
+    from: ['/get-started/applications/configure-mtls/set-up-resource-server-for-token-binding'],
+    to: '/get-started/applications/configure-sender-constraining/configure-resource-server-for-sender-constraining',
   },
   {
     from: [
@@ -1761,6 +1822,30 @@ const redirects = [
     ],
     to: '/get-started/applications/test-database-connections',
   },
+  {
+    from: ['/get-started/tenant-settings/auth0-teams'],
+    to: '/get-started/auth0-teams',
+  },
+  {
+    from: ['/get-started/tenant-settings/auth0-teams/tenant-management'],
+    to: '/get-started/auth0-teams/tenant-management',
+  },
+  {
+    from: ['/get-started/tenant-settings/auth0-teams/team-member-management'],
+    to: '/get-started/auth0-teams/team-member-management',
+  },
+  {
+    from: ['/get-started/tenant-settings/auth0-teams/tenant-member-management'],
+    to: '/get-started/auth0-teams/tenant-member-management',
+  },
+  {
+    from: ['/get-started/tenant-settings/auth0-teams/configure-security-policies'],
+    to: '/get-started/auth0-teams/configure-security-policies',
+  },
+  {
+    from: ['/get-started/tenant-settings/auth0-teams/troubleshoot-teams'],
+    to: '/get-started/auth0-teams/troubleshoot-teams',
+  },
 
   /* APIs */
 
@@ -1853,6 +1938,13 @@ const redirects = [
       '/configure/apis/create-m2m-app-test',
     ],
     to: '/get-started/apis/create-m2m-app-test',
+  },
+    {
+    from: [
+      '/api/management/v2/blacklists/get-tokens',
+      '/api/management/v2/blacklists/post-tokens',
+    ],
+    to: '/api/management/v2',
   },
 
   /* Single Sign-On */
@@ -2070,8 +2162,9 @@ const redirects = [
       '/protocols/saml/saml-configuration/auth0-as-identity-provider',
       '/protocols/saml-protocol/configure-auth0-as-saml-identity-provider',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider',
   },
   {
     from: [
@@ -2080,8 +2173,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-saml2-web-app-addon-for-aws',
       '/protocols/saml-protocol/saml-sso-integrations/configure-saml2-web-app-addon-for-aws',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-aws',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-aws',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-aws',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-aws',
   },
   {
     from: [
@@ -2089,8 +2183,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-atlassian',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-atlassian',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-atlassian',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-atlassian',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-atlassian',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-atlassian',
   },
   {
     from: [
@@ -2100,8 +2195,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-cisco-webex',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-cisco-webex',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-cisco-webex',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-cisco-webex',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-cisco-webex',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-cisco-webex',
   },
   {
     from: [
@@ -2111,8 +2207,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-datadog',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-datadog',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-datadog',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-datadog',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-datadog',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-datadog',
   },
   {
     from: [
@@ -2120,8 +2217,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-egencia',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-egencia',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-egencia',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-egencia',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-egencia',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-egencia',
   },
   {
     from: [
@@ -2130,8 +2228,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-saml2-addon-eloqua',
       '/protocols/saml-protocol/saml-sso-integrations/configure-saml2-addon-eloqua',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-saml2-addon-eloqua',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-addon-eloqua',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-addon-eloqua',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-saml2-addon-eloqua',
   },
   {
     from: [
@@ -2141,8 +2240,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-freshdesk',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-freshdesk',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-freshdesk',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-freshdesk',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-freshdesk',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-freshdesk',
   },
   {
     from: [
@@ -2150,8 +2250,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-saml2-web-app-addon-for-github-enterprise-cloud',
       '/protocols/saml-protocol/saml-sso-integrations/configure-saml2-web-app-addon-for-github-enterprise-cloud',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-cloud',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-cloud',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-cloud',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-cloud',
   },
   {
     from: [
@@ -2162,8 +2263,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-saml2-web-app-addon-for-github-enterprise-server',
       '/protocols/saml-protocol/saml-sso-integrations/configure-saml2-web-app-addon-for-github-enterprise-server',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-server',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-server',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-server',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-github-enterprise-server',
   },
   {
     from: [
@@ -2171,8 +2273,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-idp-for-google-g-suite',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-idp-for-google-g-suite',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-idp-for-google-g-suite',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-idp-for-google-g-suite',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-idp-for-google-g-suite',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-idp-for-google-g-suite',
   },
   {
     from: [
@@ -2181,8 +2284,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-saml2-web-app-addon-for-heroku',
       '/protocols/saml-protocol/saml-sso-integrations/configure-saml2-web-app-addon-for-heroku',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-heroku',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-heroku',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-heroku',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-saml2-web-app-addon-for-heroku',
   },
   {
     from: [
@@ -2190,8 +2294,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-hosted-graphite',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-hosted-graphite',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-hosted-graphite',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-hosted-graphite',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-hosted-graphite',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-hosted-graphite',
   },
   {
     from: [
@@ -2200,8 +2305,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-litmos',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-litmos',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-litmos',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-litmos',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-litmos',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-litmos',
   },
   {
     from: [
@@ -2209,8 +2315,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-pluralsight',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-pluralsight',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-pluralsight',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-pluralsight',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-pluralsight',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-pluralsight',
   },
   {
     from: [
@@ -2220,8 +2327,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-sprout-video',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-sprout-video',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-sprout-video',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-sprout-video',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-sprout-video',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-sprout-video',
   },
   {
     from: [
@@ -2229,8 +2337,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-tableau-online',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-tableau-online',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-online',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-online',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-online',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-online',
   },
   {
     from: [
@@ -2238,8 +2347,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-tableau-server',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-tableau-server',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-server',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-server',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-server',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-tableau-server',
   },
   {
     from: [
@@ -2247,8 +2357,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-workday',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-workday',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workday',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workday',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workday',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workday',
   },
   {
     from: [
@@ -2256,8 +2367,9 @@ const redirects = [
       '/protocols/saml-protocol/saml-configuration-options/configure-auth0-as-identity-provider-for-workpath',
       '/protocols/saml-protocol/saml-sso-integrations/configure-auth0-as-identity-provider-for-workpath',
       '/configure/saml-configuration/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workpath',
+      '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workpath',
     ],
-    to: '/authenticate/protocols/saml/saml-sso-integrations/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workpath',
+    to: '/authenticate/single-sign-on/outbound-single-sign-on/configure-auth0-saml-identity-provider/configure-auth0-as-identity-provider-for-workpath',
   },
   {
     from: [
@@ -2303,6 +2415,38 @@ const redirects = [
     from: ['/authorization/protocols/scim'],
     to: '/authenticate/protocols/scim',
   },
+  {
+    from: [
+      '/authenticate/protocols/scim/configure-inbound-scim/configure-inbound-scim-for-other-identity-providers-using-openid-or-saml',
+    ],
+    to: '/authenticate/protocols/scim/configure-inbound-scim-for-identity-providers-using-saml-or-openid',
+  },
+  {
+    from: ['/authenticate/protocols/scim/configure-inbound-scim/inbound-scim-for-new-azure-ad-connections'],
+    to: '/authenticate/protocols/scim/inbound-scim-for-new-azure-ad-connections',
+  },
+  {
+    from: ['/authenticate/protocols/scim/configure-inbound-scim/inbound-scim-for-older-azure-ad-connections'],
+    to: '/authenticate/protocols/scim/inbound-scim-for-older-azure-ad-connections',
+  },
+  {
+    from: [
+      '/authenticate/protocols/scim/configure-inbound-scim/manage-an-inbound-scim-deployment-with-the-management-api',
+    ],
+    to: '/authenticate/protocols/scim/manage-an-inbound-scim-deployment-with-the-management-api',
+  },
+  {
+    from: ['/authenticate/protocols/scim/configure-inbound-scim/inbound-scim-for-okta-workforce-saml-connections'],
+    to: '/authenticate/protocols/scim/inbound-scim-for-okta-workforce-saml-connections',
+  },
+  {
+    from: ['/authenticate/protocols/scim/configure-inbound-scim/inbound-scim-for-azure-ad-saml-connections'],
+    to: '/authenticate/protocols/scim/inbound-scim-for-azure-ad-saml-connections',
+  },
+  {
+    from: ['/authenticate/protocols/scim/configure-inbound-scim/inbound-scim-for-okta-workforce-connections'],
+    to: '/authenticate/protocols/scim/inbound-scim-for-okta-workforce-connections',
+  },
 
   /* Actions */
   {
@@ -2329,42 +2473,40 @@ const redirects = [
       '/actions/blueprints',
       '/actions/triggers',
       '/customize/actions/triggers',
+      '/customize/actions/flows-and-triggers',
     ],
-    to: '/customize/actions/flows-and-triggers',
+    to: '/customize/actions/explore-triggers',
   },
   {
-    from: [
-      '/actions/manage-action-versions',
-      '/actions/manage-versions',
-      '/customize/actions/manage-action-versions'
-    ],
+    from: ['/actions/manage-action-versions', '/actions/manage-versions', '/customize/actions/manage-action-versions'],
     to: '/customize/actions/manage-versions',
   },
   {
     from: [
       '/actions/triggers/send-phone-message',
-      '/customize/actions/triggers/send-phone-message'
-      ],
-    to: '/customize/actions/flows-and-triggers/send-phone-message-flow',
+      '/customize/actions/triggers/send-phone-message',
+      '/customize/actions/flows-and-triggers/send-phone-message-flow',
+    ],
+    to: '/customize/actions/explore-triggers/mfa-notifications-trigger',
   },
   {
     from: [
       '/actions/triggers/send-phone-message/event-object',
-      '/customize/actions/triggers/send-phone-message/event-object'
-      ],
-    to: '/customize/actions/flows-and-triggers/send-phone-message-flow/event-object',
+      '/customize/actions/triggers/send-phone-message/event-object',
+      '/customize/actions/flows-and-triggers/send-phone-message-flow/event-object',
+    ],
+    to: '/customize/actions/explore-triggers/mfa-notifications-trigger/send-phone-message-event-object',
   },
   {
-    from: [
-      '/actions/programming-model-changes',
-      '/customize/actions/programming-model-changes'
-      ],
+    from: ['/customize/actions/flows-and-triggers/send-phone-message-flow/api-object'],
+    to: '/customize/actions/explore-triggers/mfa-notifications-trigger/send-phone-message-api-object',
+  },
+  {
+    from: ['/actions/programming-model-changes', '/customize/actions/programming-model-changes'],
     to: '/customize/actions/migrate/migrate-from-actions-beta-to-final',
   },
   {
-    from: [
-      '/customize/actions/migrate-from-rules-to-actions'
-      ],
+    from: ['/customize/actions/migrate-from-rules-to-actions'],
     to: '/customize/actions/migrate/migrate-from-rules-to-actions',
   },
   {
@@ -2374,100 +2516,141 @@ const redirects = [
   {
     from: [
       '/actions/triggers/post-change-password',
-      '/customize/actions/triggers/post-change-password'
+      '/customize/actions/triggers/post-change-password',
+      '/customize/actions/flows-and-triggers/post-change-password-flow',
     ],
-    to: '/customize/actions/flows-and-triggers/post-change-password-flow',
+    to: '/customize/actions/explore-triggers/password-reset-triggers/post-change-password-trigger',
   },
   {
     from: [
       '/actions/triggers/post-change-password/event-object',
       '/customize/actions/triggers/post-change-password/event-object',
+      '/customize/actions/flows-and-triggers/post-change-password-flow/event-object',
     ],
-    to: '/customize/actions/flows-and-triggers/post-change-password-flow/event-object',
+    to: '/customize/actions/explore-triggers/password-reset-triggers/post-challenge-trigger/post-challenge-event-object',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/post-change-password-flow/api-object'],
+    to: '/customize/actions/explore-triggers/password-reset-triggers/post-challenge-trigger/post-challenge-api-object',
   },
   {
     from: [
       '/actions/triggers/post-user-registration',
-      '/customize/actions/triggers/post-user-registration'
+      '/customize/actions/triggers/post-user-registration',
+      '/customize/actions/flows-and-triggers/post-user-registration-flow',
     ],
-    to: '/customize/actions/flows-and-triggers/post-user-registration-flow',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/post-user-registration-trigger',
   },
   {
     from: [
       '/actions/triggers/post-user-registration/event-object',
-      '/customize/actions/triggers/post-user-registration/event-object'
+      '/customize/actions/triggers/post-user-registration/event-object',
+      '/customize/actions/flows-and-triggers/post-user-registration-flow/event-object',
     ],
-    to: '/customize/actions/flows-and-triggers/post-user-registration-flow/event-object',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/post-user-registration-trigger/post-user-registration-event-object',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/post-user-registration-flow/api-object'],
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/post-user-registration-trigger/post-user-registration-api-object',
   },
   {
     from: [
       '/actions/triggers/pre-user-registration',
-      '/customize/actions/triggers/pre-user-registration'
+      '/customize/actions/triggers/pre-user-registration',
+      '/customize/actions/flows-and-triggers/pre-user-registration-flow',
     ],
-    to: '/customize/actions/flows-and-triggers/pre-user-registration-flow',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger',
   },
   {
     from: [
       '/actions/triggers/pre-user-registration/event-object',
-      '/customize/actions/triggers/pre-user-registration/event-object'
+      '/customize/actions/triggers/pre-user-registration/event-object',
+      '/customize/actions/flows-and-triggers/pre-user-registration-flow/event-object',
     ],
-    to: '/customize/actions/flows-and-triggers/pre-user-registration-flow/event-object',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger/pre-user-registration-event-object',
   },
   {
     from: [
       '/actions/triggers/pre-user-registration/api-object',
-      '/customize/actions/triggers/pre-user-registration/api-object'
+      '/customize/actions/triggers/pre-user-registration/api-object',
+      '/customize/actions/flows-and-triggers/pre-user-registration-flow/api-object',
     ],
-    to: '/customize/actions/flows-and-triggers/pre-user-registration-flow/api-object',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/pre-user-registration-trigger/pre-user-registration-api-object',
   },
   {
-    from: [
-      '/actions/triggers/credentials-exchange',
-      '/customize/actions/triggers/credentials-exchange'
-    ],
+    from: ['/actions/triggers/credentials-exchange', '/customize/actions/triggers/credentials-exchange'],
     to: '/customize/actions/flows-and-triggers/machine-to-machine-flow',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/machine-to-machine-flow'],
+    to: '/customize/actions/explore-triggers/machine-to-machine-trigger',
   },
   {
     from: [
       '/actions/triggers/credentials-exchange/event-object',
-      '/customize/actions/triggers/credentials-exchange/event-object'
+      '/customize/actions/triggers/credentials-exchange/event-object',
+      '/customize/actions/flows-and-triggers/machine-to-machine-flow/event-object',
     ],
-    to: '/customize/actions/flows-and-triggers/machine-to-machine-flow/event-object',
+    to: '/customize/actions/explore-triggers/machine-to-machine-trigger/credentials-exchange-event-object',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/machine-to-machine-flow/api-object'],
+    to: '/customize/actions/explore-triggers/machine-to-machine-trigger/credentials-exchange-api-object',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/password-reset'],
+    to: '/customize/actions/explore-triggers/password-reset-triggers',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/password-reset/event-object'],
+    to: '/customize/actions/explore-triggers/password-reset-triggers/post-challenge-trigger/post-challenge-event-object',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/password-reset/api-object'],
+    to: '/customize/actions/explore-triggers/password-reset-triggers/post-challenge-trigger/post-challenge-api-object',
   },
   {
     from: [
       '/actions/triggers/credentials-exchange/api-object',
-      '/customize/actions/triggers/credentials-exchange/api-object'
+      '/customize/actions/triggers/credentials-exchange/api-object',
     ],
-    to: '/customize/actions/flows-and-triggers/machine-to-machine-flow/api-object',
+    to: '/customize/actions/explore-triggers/machine-to-machine-trigger',
   },
   {
     from: [
       '/actions/triggers/post-login',
-      '/customize/actions/triggers/post-login'
+      '/customize/actions/triggers/post-login',
+      '/customize/actions/flows-and-triggers/login-flow',
     ],
-    to: '/customize/actions/flows-and-triggers/login-flow',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger',
   },
   {
     from: [
       '/actions/triggers/post-login/event-object',
-      '/customize/actions/triggers/post-login/event-object'
+      '/customize/actions/triggers/post-login/event-object',
+      '/customize/actions/flows-and-triggers/login-flow/event-object',
     ],
-    to: '/customize/actions/flows-and-triggers/login-flow/event-object',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-event-object',
   },
   {
     from: [
       '/actions/triggers/post-login/api-object',
-      '/customize/actions/triggers/post-login/api-object'
+      '/customize/actions/triggers/post-login/api-object',
+      '/customize/actions/flows-and-triggers/login-flow/api-object',
     ],
-    to: '/customize/actions/flows-and-triggers/login-flow/api-object',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/post-login-api-object',
   },
   {
     from: [
       '/actions/triggers/post-login/redirect-with-actions',
-      '/customize/actions/triggers/post-login/redirect-with-actions'
+      '/customize/actions/triggers/post-login/redirect-with-actions',
+      '/customize/actions/flows-and-triggers/login-flow/redirect-with-actions',
     ],
-    to: '/customize/actions/flows-and-triggers/login-flow/redirect-with-actions',
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/redirect-with-actions',
+  },
+  {
+    from: ['/customize/actions/flows-and-triggers/login-flow/releases'],
+    to: '/customize/actions/explore-triggers/signup-and-login-triggers/login-trigger/releases',
   },
 
   /* Attack Protection */
@@ -2515,8 +2698,9 @@ const redirects = [
       '/anomaly-detection/bot-detection/configure-recaptcha-enterprise',
       '/attack-protection/bot-detection/configure-recaptcha-enterprise',
       '/configure/attack-protection/bot-detection/configure-recaptcha-enterprise',
+      '/secure/attack-protection/bot-detection/configure-recaptcha-enterprise',
     ],
-    to: '/secure/attack-protection/bot-detection/configure-recaptcha-enterprise',
+    to: '/secure/attack-protection/bot-detection/configure-captcha',
   },
   {
     from: [
@@ -2584,7 +2768,7 @@ const redirects = [
     to: '/api/authentication',
   },
   {
-    from: ['/apiv2', '/api/v2', '/api/management'],
+    from: ['/apiv2', '/api/v2', '/api/management','/api/management/v2/blacklists/get-tokens','/api/management/v2/blacklists/post-tokens' ],
     to: '/api/management/v2',
   },
   {
@@ -2594,6 +2778,14 @@ const redirects = [
   {
     from: ['/api/use-auth0-apis-with-postman-collections', '/api/postman'],
     to: '/api',
+  },
+  {
+    from: ['/api/management'],
+    to: '/api/management/v2',
+  },
+  {
+    from: ['/api/management/v2/blacklists/get-tokens', '/api/management/v2/blacklists/post-tokens'],
+    to: '/api/management/v2',
   },
 
   /* Authorization */
@@ -2667,8 +2859,9 @@ const redirects = [
       '/api-auth/tutorials/authorization-code-grant',
       '/flows/call-your-api-using-the-authorization-code-flow',
       '/authorization/flows/call-your-api-using-the-authorization-code-flow',
+      '/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow',
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow/call-your-api-using-the-authorization-code-flow',
   },
   {
     from: [
@@ -2678,8 +2871,9 @@ const redirects = [
       '/flows/concepts/single-page-login-flow',
       '/flows/authorization-code-flow-with-proof-key-for-code-exchange-pkce',
       '/authorization/flows/authorization-code-flow-with-proof-key-for-code-exchange-pkce',
+      '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce',
     ],
-    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce',
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce',
   },
   {
     from: [
@@ -2691,8 +2885,9 @@ const redirects = [
       '/api-auth/tutorials/authorization-code-grant-pkce',
       '/flows/call-your-api-using-the-authorization-code-flow-with-pkce',
       '/authorization/flows/call-your-api-using-the-authorization-code-flow-with-pkce',
+      '/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow-with-pkce',
     ],
-    to: '/get-started/authentication-and-authorization-flow/call-your-api-using-the-authorization-code-flow-with-pkce',
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/call-your-api-using-the-authorization-code-flow-with-pkce',
   },
   {
     from: [
@@ -2716,8 +2911,9 @@ const redirects = [
       '/api-auth/tutorials/nonce',
       '/authorization/mitigate-replay-attacks-when-using-the-implicit-flow',
       '/authorization/flows/mitigate-replay-attacks-when-using-the-implicit-flow',
+      '/get-started/authentication-and-authorization-flow/mitigate-replay-attacks-when-using-the-implicit-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/mitigate-replay-attacks-when-using-the-implicit-flow',
+    to: '/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post/mitigate-replay-attacks-when-using-the-implicit-flow',
   },
   {
     from: ['/flows/hybrid-flow', '/api-auth/grant/hybrid', '/authorization/flows/hybrid-flow'],
@@ -2728,8 +2924,9 @@ const redirects = [
       '/api-auth/tutorials/hybrid-flow',
       '/flows/call-api-hybrid-flow',
       '/authorization/flows/call-api-hybrid-flow',
+      '/get-started/authentication-and-authorization-flow/call-api-hybrid-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/call-api-hybrid-flow',
+    to: '/get-started/authentication-and-authorization-flow/hybrid-flow/call-api-hybrid-flow',
   },
   {
     from: [
@@ -2753,8 +2950,9 @@ const redirects = [
       '/api-auth/config/asking-for-access-tokens',
       '/flows/call-your-api-using-the-client-credentials-flow',
       '/authorization/flows/call-your-api-using-the-client-credentials-flow',
+      '/get-started/authentication-and-authorization-flow/call-your-api-using-the-client-credentials-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/call-your-api-using-the-client-credentials-flow',
+    to: '/get-started/authentication-and-authorization-flow/client-credentials-flow/call-your-api-using-the-client-credentials-flow',
   },
   {
     from: [
@@ -2762,8 +2960,9 @@ const redirects = [
       '/api-auth/grant/using-rules',
       '/authorization/customize-tokens-using-hooks-with-client-credentials-flow',
       '/authorization/flows/customize-tokens-using-hooks-with-client-credentials-flow',
+      '/get-started/authentication-and-authorization-flow/customize-tokens-using-hooks-with-client-credentials-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/customize-tokens-using-hooks-with-client-credentials-flow',
+    to: '/get-started/authentication-and-authorization-flow/client-credentials-flow/customize-tokens-using-hooks-with-client-credentials-flow',
   },
   {
     from: [
@@ -2778,8 +2977,9 @@ const redirects = [
       '/flows/guides/device-auth/call-api-device-auth',
       '/authorization/flows/call-your-api-using-the-device-authorization-flow',
       '/microsites/protect-api/protect-api',
+      '/get-started/authentication-and-authorization-flow/call-your-api-using-the-device-authorization-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/call-your-api-using-the-device-authorization-flow',
+    to: '/get-started/authentication-and-authorization-flow/device-authorization-flow/call-your-api-using-the-device-authorization-flow',
   },
   {
     from: [
@@ -2795,8 +2995,9 @@ const redirects = [
       '/flows/call-your-api-using-resource-owner-password-flow',
       '/api-auth/tutorials/password-grant',
       '/authorization/flows/call-your-api-using-resource-owner-password-flow',
+      '/get-started/authentication-and-authorization-flow/call-your-api-using-resource-owner-password-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/call-your-api-using-resource-owner-password-flow',
+    to: '/get-started/authentication-and-authorization-flow/resource-owner-password-flow/call-your-api-using-resource-owner-password-flow',
   },
   {
     from: [
@@ -2804,8 +3005,9 @@ const redirects = [
       '/authorization/avoid-common-issues-with-resource-owner-password-flow-and-anomaly-detection',
       '/authorization/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection',
       '/authorization/flows/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection',
+      '/get-started/authentication-and-authorization-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection',
     ],
-    to: '/get-started/authentication-and-authorization-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection',
+    to: '/get-started/authentication-and-authorization-flow/resource-owner-password-flow/avoid-common-issues-with-resource-owner-password-flow-and-attack-protection',
   },
   {
     from: ['/authorization/concepts/rbac', '/authorization/rbac', '/rbac'],
@@ -3070,8 +3272,8 @@ const redirects = [
     to: '/troubleshoot/performance-best-practices',
   },
   {
-    from: ['/best-practices/rules', '/best-practices/rules-best-practices'],
-    to: '/customize/rules/rules-best-practices',
+    from: ['/best-practices/rules', '/best-practices/rules-best-practices', '/customize/rules/rules-best-practices'],
+    to: '/customize/actions/action-coding-guidelines',
   },
   {
     from: [
@@ -3082,24 +3284,40 @@ const redirects = [
     to: '/manage-users/user-search/user-search-best-practices',
   },
   {
-    from: ['/best-practices/rules-best-practices/rules-anatomy-best-practices'],
-    to: '/customize/rules/rules-best-practices/rules-anatomy-best-practices',
+    from: [
+      '/best-practices/rules-best-practices/rules-anatomy-best-practices',
+      '/customize/rules/rules-best-practices/rules-anatomy-best-practices',
+    ],
+    to: '/customize/actions/action-coding-guidelines',
   },
   {
-    from: ['/best-practices/rules-best-practices/rules-environment-best-practices'],
-    to: '/customize/rules/rules-best-practices/rules-environment-best-practices',
+    from: [
+      '/best-practices/rules-best-practices/rules-environment-best-practices',
+      '/customize/rules/rules-best-practices/rules-environment-best-practices',
+    ],
+    to: '/customize/actions/action-coding-guidelines',
   },
   {
-    from: ['/best-practices/rules-best-practices/rules-execution-best-practices'],
-    to: '/customize/rules/rules-best-practices/rules-execution-best-practices',
+    from: [
+      '/best-practices/rules-best-practices/rules-execution-best-practices',
+      '/customize/rules/rules-best-practices/rules-execution-best-practices',
+    ],
+    to: '/customize/actions/action-coding-guidelines',
   },
   {
-    from: ['/best-practices/rules-best-practices/rules-security-best-practices'],
-    to: '/customize/rules/rules-best-practices/rules-security-best-practices',
+    from: [
+      '/best-practices/rules-best-practices/rules-security-best-practices',
+      '/customize/rules/rules-best-practices/rules-security-best-practices',
+    ],
+    to: '/customize/actions/action-coding-guidelines',
   },
   {
-    from: ['/best-practices/testing', '/best-practices/rules-best-practices/rules-testing-best-practices'],
-    to: '/customize/rules/rules-best-practices/rules-testing-best-practices',
+    from: [
+      '/best-practices/testing',
+      '/best-practices/rules-best-practices/rules-testing-best-practices',
+      '/customize/rules/rules-best-practices/rules-testing-best-practices',
+    ],
+    to: '/customize/actions/action-coding-guidelines',
   },
   {
     from: [
@@ -3127,14 +3345,19 @@ const redirects = [
     to: '/customize',
   },
   {
+    from: ['/sign-up-prompt-customizations', '/customize/universal-login-pages/customize-signup-and-login-prompts'],
+    to: '/customize/login-pages/universal-login/customize-signup-and-login-prompts',
+  },
+  {
     from: [
       '/universal-login/new-experience/universal-login-page-templates',
       '/universal-login/page-templates',
       '/universal-login/universal-login-page-customization',
       '/customize/universal-login-page-templates',
       '/brand-and-customize/universal-login-page-templates',
+      '/customize/universal-login-pages',
     ],
-    to: '/customize/universal-login-pages',
+    to: '/customize/login-pages',
   },
   {
     from: [
@@ -3142,8 +3365,9 @@ const redirects = [
       '/universal-login/customization-classic',
       '/universal-login/advanced-customization',
       '/brand-and-customize/customization-classic',
+      '/customize/universal-login-pages/customization-classic',
     ],
-    to: '/customize/universal-login-pages/customization-classic',
+    to: '/customize/login-pages/classic-login/customization-classic',
   },
   {
     from: [
@@ -3152,8 +3376,9 @@ const redirects = [
       '/hosted-pages/version-control',
       '/brand-and-customize/version-control-universal-login-pages',
       '/customize/universal-login-pages/version-control-universal-login-pages',
+      '/customize/universal-login-pages/version-control',
     ],
-    to: '/customize/universal-login-pages/version-control',
+    to: '/customize/login-pages/classic-login/version-control',
   },
 
   /* Custom Domains */
@@ -3362,8 +3587,9 @@ const redirects = [
       '/universal-login/text-customization',
       '/brand-and-customize/text-customization-new-universal-login',
       '/brand-and-customize/customize-login-text-prompts',
+      '/customize/universal-login-pages/customize-login-text-prompts',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3374,7 +3600,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-common',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-common',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3385,7 +3611,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-consent',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-consent',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3396,7 +3622,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-device-flow',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-device-flow',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts'
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3405,7 +3631,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-email-otp-challenge',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-email-otp-challenge',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3416,7 +3642,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-email-verification',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-email-verification',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3425,7 +3651,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-accept-invitation',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-accept-invitation',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3436,7 +3662,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-login',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-login',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3445,7 +3671,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-login-email-verification',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-login-email-verification',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3454,7 +3680,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-login-id',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-login-id',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3463,7 +3689,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-login-password',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-login-password',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3473,7 +3699,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3483,7 +3709,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-email',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-email',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3493,7 +3719,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-otp',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-otp',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3502,7 +3728,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-phone',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-phone',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3512,7 +3738,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-push',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-push',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3522,7 +3748,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-recovery-code',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-recovery-code',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3532,7 +3758,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-sms',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-sms',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3541,7 +3767,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-voice',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-voice',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3550,7 +3776,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-mfa-webauthn',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-mfa-webauthn',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3559,7 +3785,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-organization-selection',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-organization-selection',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3569,7 +3795,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-reset-password',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-reset-password',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3579,7 +3805,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-signup',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-signup',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3588,7 +3814,7 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-signup-id',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-signup-id',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
@@ -3597,15 +3823,16 @@ const redirects = [
       '/brand-and-customize/customize-login-text-prompts/prompt-signup-password',
       '/customize/universal-login-pages/customize-login-text-prompts/prompt-signup-password',
     ],
-    to: '/customize/universal-login-pages/customize-login-text-prompts',
+    to: '/customize/login-pages/universal-login/customize-text-elements',
   },
   {
     from: [
       '/scopes/customize-consent-prompts',
       '/scopes/current/guides/customize-consent-prompt',
       '/brand-and-customize/customize-consent-prompts',
+      '/customize/universal-login-pages/customize-consent-prompts',
     ],
-    to: '/customize/universal-login-pages/customize-consent-prompts',
+    to: '/customize/login-pages/customize-consent-prompts',
   },
   {
     from: [
@@ -3613,8 +3840,9 @@ const redirects = [
       '/error-pages/custom',
       '/hosted-pages/custom-error-pages',
       '/brand-and-customize/custom-error-pages',
+      '/customize/universal-login-pages/custom-error-pages',
     ],
-    to: '/customize/universal-login-pages/custom-error-pages',
+    to: '/customize/login-pages/custom-error-pages',
   },
   {
     from: [
@@ -3622,8 +3850,9 @@ const redirects = [
       '/libraries/lock/v11/customizing-error-messages',
       '/libraries/lock/customizing-error-messages',
       '/brand-and-customize/customize-lock-error-messages',
+      '/customize/customize-lock-error-messages',
     ],
-    to: '/customize/customize-lock-error-messages',
+    to: '/customize/login-pages/classic-login/customize-lock-error-messages',
   },
   {
     from: [
@@ -3631,8 +3860,9 @@ const redirects = [
       '/universal-login/password-reset',
       '/hosted-pages/password-reset',
       '/brand-and-customize/customize-password-reset-page',
+      '/customize/universal-login-pages/customize-password-reset-page',
     ],
-    to: '/customize/universal-login-pages/customize-password-reset-page',
+    to: '/customize/login-pages/classic-login/customize-password-reset-page',
   },
   {
     from: [
@@ -3648,6 +3878,20 @@ const redirects = [
   {
     from: ['/login/adopt-oidc-conformant-authentication'],
     to: '/authenticate/login/oidc-conformant-authentication',
+  },
+  {
+    from: ['/customize/universal-login-pages/customize-new-universal-login-with-the-no-code-editor'],
+    to: '/customize/login-pages/universal-login/customize-themes',
+  },
+
+  {
+    from: ['/customize/universal-login-pages/universal-login-page-templates'],
+    to: '/customize/login-pages/universal-login/customize-templates',
+  },
+
+  {
+    from: ['/customize/universal-login-pages/universal-login-page-customization'],
+    to: '/customize/login-pages/classic-login/customize-with-lock-sdk',
   },
 
   /* Internationalization and Localization */
@@ -4043,6 +4287,66 @@ const redirects = [
     to: '/deploy-monitor/deploy-private-cloud/private-cloud-on-azure',
   },
 
+  /* Deploy CLI Tool */
+
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/install-and-configure-the-deploy-cli-tool'],
+    to: '/deploy-monitor/deploy-cli-tool',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/create-and-configure-the-deploy-cli-application'],
+    to: '/deploy-monitor/deploy-cli-tool',
+  },
+  {
+    from: [
+      '/deploy-monitor/auth0-deploy-cli/configuring-the-deploy-cli',
+      '/deploy-monitor/deploy-cli-tool/configuring-the-deploy-cli',
+    ],
+    to: '/deploy-monitor/deploy-cli-tool/configure-the-deploy-cli',
+  },
+  {
+    from: [
+      '/deploy-monitor/deploy-cli-tool/call-deploy-cli-tool-programmatically',
+      '/deploy-monitor/deploy-cli-tool/using-as-a-node-module',
+    ],
+    to: '/deploy-monitor/deploy-cli-tool/use-as-a-node-module',
+  },
+  {
+    from: [
+      '/deploy-monitor/deploy-cli-tool/incorporate-deploy-cli-into-build-environment',
+      '/deploy-monitor/deploy-cli-tool/incorporating-into-multi-environment-workflows',
+    ],
+    to: '/deploy-monitor/deploy-cli-tool/incorporate-into-multi-environment-workflows',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/import-export-tenant-configuration-to-yaml-file'],
+    to: '/deploy-monitor/deploy-cli-tool/keyword-replacement',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/import-export-tenant-configuration-to-directory-structure'],
+    to: '/deploy-monitor/deploy-cli-tool/keyword-replacement',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/environment-variables-and-keyword-mappings'],
+    to: '/deploy-monitor/deploy-cli-tool/keyword-replacement',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/deploy-cli-tool-options', '/deploy-monitor/deploy-cli-tool/using-as-a-cli'],
+    to: '/deploy-monitor/deploy-cli-tool/use-as-a-cli',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/auth0-terraform-provider'],
+    to: '/deploy-monitor/auth0-terraform-provider',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/how-to-contribute'],
+    to: '/deploy-monitor/deploy-cli-tool',
+  },
+  {
+    from: ['/deploy-monitor/deploy-cli-tool/excluding-resources-from-management'],
+    to: '/deploy-monitor/deploy-cli-tool/exclude-resources-from-management',
+  },
+
   /* Extensions */
 
   {
@@ -4297,104 +4601,120 @@ const redirects = [
       '/logs/export-log-events-with-extensions',
       '/logs/log-export-extensions',
       '/extensions/log-export-extensions',
+      '/customize/extensions/export-log-events-with-extensions',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-application-insights',
       '/extensions/application-insight',
       '/extensions/log-export-extensions/export-logs-to-application-insights',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-application-insights',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-application-insights',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-cloudwatch',
       '/extensions/cloudwatch',
       '/extensions/log-export-extensions/export-logs-to-cloudwatch',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-cloudwatch',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-cloudwatch',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-azure-blob-storage',
       '/extensions/azure-blob-storage',
       '/extensions/log-export-extensions/export-logs-to-azure-blob-storage',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-azure-blob-storage',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-azure-blob-storage',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-logentries',
       '/extensions/logentries',
       '/extensions/log-export-extensions/export-logs-to-logentries',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-logentries',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-logentries',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-loggly',
       '/extensions/loggly',
       '/extensions/log-export-extensions/export-logs-to-loggly',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-loggly',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-loggly',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-logstash',
       '/extensions/logstash',
       '/extensions/log-export-extensions/export-logs-to-logstash',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-logstash',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-logstash',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-mixpanel',
       '/extensions/mixpanel',
       '/extensions/log-export-extensions/export-logs-to-mixpanel',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-mixpanel',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-mixpanel',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-papertrail',
       '/extensions/papertrail',
       '/extensions/log-export-extensions/export-logs-to-papertrail',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-papertrail',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-papertrail',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-segment',
       '/extensions/segment',
       '/extensions/log-export-extensions/export-logs-to-segment',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-segment',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-segment',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/export-logs-to-splunk',
       '/extensions/splunk',
       '/extensions/log-export-extensions/export-logs-to-splunk',
+      '/customize/extensions/export-log-events-with-extensions/export-logs-to-splunk',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/export-logs-to-splunk',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: [
       '/extensions/auth0-logs-to-sumo-logic',
       '/extensions/sumologic',
       '/extensions/log-export-extensions/auth0-logs-to-sumo-logic',
+      '/customize/extensions/export-log-events-with-extensions/auth0-logs-to-sumo-logic',
     ],
-    to: '/customize/extensions/export-log-events-with-extensions/auth0-logs-to-sumo-logic',
+    to: '/customize/log-streams/custom-log-streams',
   },
   {
     from: ['/extensions/authentication-api-debugger', '/extensions/authentication-api-debugger-extension'],
     to: '/customize/extensions/authentication-api-debugger-extension',
   },
   {
-    from: ['/extensions/authentication-api-webhooks', '/extensions/auth0-authentication-api-webhooks'],
-    to: '/customize/extensions/auth0-authentication-api-webhooks',
+    from: [
+      '/extensions/authentication-api-webhooks',
+      '/extensions/auth0-authentication-api-webhooks',
+      '/customize/extensions/auth0-authentication-api-webhooks',
+    ],
+    to: '/customize/extensions',
   },
   {
     from: ['/extensions/user-import-export', '/extensions/user-import-export-extension'],
@@ -4423,8 +4743,12 @@ const redirects = [
     to: 'https://marketplace.auth0.com/integrations/gitlab-pipeline',
   },
   {
-    from: ['/extensions/management-api-webhooks', '/extensions/auth0-management-api-webhooks'],
-    to: '/customize/extensions/auth0-management-api-webhooks',
+    from: [
+      '/extensions/management-api-webhooks',
+      '/extensions/auth0-management-api-webhooks',
+      '/customize/extensions/auth0-management-api-webhooks',
+    ],
+    to: '/customize/extensions',
   },
   {
     from: ['/extensions/realtime-webtask-logs', '/extensions/real-time-webtask-logs'],
@@ -4734,8 +5058,9 @@ const redirects = [
       '/hooks/concepts/extensibility-points',
       '/hooks/concepts/overview-extensibility-points',
       '/hooks/extensibility-points',
+      '/customize/hooks/extensibility-points',
     ],
-    to: '/customize/hooks/extensibility-points',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -4744,8 +5069,9 @@ const redirects = [
       '/hooks/client-credentials-exchange',
       '/hooks/extensibility-points/credentials-exchange',
       '/hooks/extensibility-points/client-credentials-exchange',
+      '/customize/hooks/extensibility-points/client-credentials-exchange',
     ],
-    to: '/customize/hooks/extensibility-points/client-credentials-exchange',
+    to: '/customize/hooks',
   },
   {
     from: [
@@ -4756,6 +5082,7 @@ const redirects = [
       '/hooks/guides/create-hooks-using-dashboard',
       '/auth0-hooks/cli/create-delete',
       '/hooks/create-hooks',
+      '/create-hooks',
     ],
     to: '/customize/hooks/create-hooks',
   },
@@ -4785,8 +5112,9 @@ const redirects = [
       '/hooks/guides/post-change-password',
       '/hooks/post-change-password',
       '/hooks/extensibility-points/post-change-password',
+      '/customize/hooks/extensibility-points/post-change-password',
     ],
-    to: '/customize/hooks/extensibility-points/post-change-password',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -4794,8 +5122,9 @@ const redirects = [
       '/hooks/guides/use-the-post-user-registration-extensibility-point',
       '/hooks/post-user-registration',
       '/hooks/extensibility-points/post-user-registration',
+      '/customize/hooks/extensibility-points/post-user-registration',
     ],
-    to: '/customize/hooks/extensibility-points/post-user-registration',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -4804,8 +5133,9 @@ const redirects = [
       '/auth0-hooks/extensibility-points/pre-user-registration',
       '/hooks/pre-user-registration',
       '/hooks/extensibility-points/pre-user-registration',
+      '/customize/hooks/extensibility-points/pre-user-registration',
     ],
-    to: '/customize/hooks/extensibility-points/pre-user-registration',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: ['/hooks/secrets/create', '/hooks/hook-secrets/create-hook-secrets'],
@@ -4854,45 +5184,33 @@ const redirects = [
     to: '/customize/hooks/view-hooks',
   },
   {
-    from: ['/hooks/extensibility-points/send-phone-message'],
-    to: '/customize/hooks/extensibility-points/send-phone-message',
+    from: [
+      '/hooks/extensibility-points/send-phone-message',
+      '/customize/hooks/extensibility-points/send-phone-message',
+    ],
+    to: '/customize/actions/flows-and-triggers',
   },
 
   /* Identity Labs */
 
   {
-    from: [
-      '/labs',
-      '/identity-labs',
-    ],
+    from: ['/labs', '/identity-labs'],
     to: '/get-started',
   },
   {
-    from: [
-      '/identity-labs/01-web-sign-in',
-      '/identity-labs/lab-1-web-sign-in',
-    ],
+    from: ['/identity-labs/01-web-sign-in', '/identity-labs/lab-1-web-sign-in'],
     to: '/get-started',
   },
   {
-    from: [
-      '/identity-labs/01-web-sign-in/exercise-01',
-      '/identity-labs/lab-1-web-sign-in/identity-lab-1-exercise-1',
-    ],
+    from: ['/identity-labs/01-web-sign-in/exercise-01', '/identity-labs/lab-1-web-sign-in/identity-lab-1-exercise-1'],
     to: '/get-started',
   },
   {
-    from: [
-      '/identity-labs/01-web-sign-in/exercise-02',
-      '/identity-labs/lab-1-web-sign-in/identity-lab-1-exercise-2',
-    ],
+    from: ['/identity-labs/01-web-sign-in/exercise-02', '/identity-labs/lab-1-web-sign-in/identity-lab-1-exercise-2'],
     to: '/get-started',
   },
   {
-    from: [
-      '/identity-labs/02-calling-an-api',
-      '/identity-labs/identity-lab-2-calling-api',
-    ],
+    from: ['/identity-labs/02-calling-an-api', '/identity-labs/identity-lab-2-calling-api'],
     to: '/get-started',
   },
   {
@@ -4900,7 +5218,7 @@ const redirects = [
       '/identity-labs/02-calling-an-api/exercise-01',
       '/identity-labs/identity-lab-2-calling-api/identity-lab-2-exercise-1',
     ],
-    to:  '/get-started',
+    to: '/get-started',
   },
   {
     from: [
@@ -4917,10 +5235,7 @@ const redirects = [
     to: '/get-started',
   },
   {
-    from: [
-      '/identity-labs/03-mobile-native-app',
-      '/identity-labs/lab-3-mobile-native-app',
-    ],
+    from: ['/identity-labs/03-mobile-native-app', '/identity-labs/lab-3-mobile-native-app'],
     to: '/get-started',
   },
   {
@@ -4945,10 +5260,7 @@ const redirects = [
     to: '/get-started',
   },
   {
-    from: [
-      '/identity-labs/04-single-page-app',
-      '/identity-labs/lab-4-single-page-app',
-    ],
+    from: ['/identity-labs/04-single-page-app', '/identity-labs/lab-4-single-page-app'],
     to: '/get-started',
   },
   {
@@ -5124,6 +5436,12 @@ const redirects = [
       '/integrations/migrate-office365-connections-to-windows-azure-ad',
     ],
     to: '/customize/integrations/migrate-office365-connections-to-windows-azure-ad',
+  },
+  {
+    from: [
+      '/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-nodejs-16-to-nodejs-18',
+    ],
+    to: '/troubleshoot/product-lifecycle/past-migrations/migrate-nodejs-16-to-nodejs-18',
   },
   {
     from: [
@@ -5408,6 +5726,10 @@ const redirects = [
   {
     from: ['/integrations/marketing'],
     to: '/customize/integrations/marketing-tool-integrations',
+  },
+  {
+    from: ['/integrations/integrate-with-vercel'],
+    to: '/customize/integrations/integrate-with-vercel',
   },
 
   /* Libraries */
@@ -5818,8 +6140,9 @@ const redirects = [
     from: [
       '/universal-login/new-universal-login-vs-classic-universal-login',
       '/login/universal-login/new-universal-login-vs-classic-universal-login',
+      '/authenticate/login/auth0-universal-login/new-universal-login-vs-classic-universal-login',
     ],
-    to: '/authenticate/login/auth0-universal-login/new-universal-login-vs-classic-universal-login',
+    to: '/authenticate/login/auth0-universal-login/universal-login-vs-classic-login',
   },
   {
     from: [
@@ -5827,16 +6150,18 @@ const redirects = [
       '/universal-login/new',
       '/login/universal-login/new-experience',
       '/universal-login/new-experience-limitations',
+      '/authenticate/login/auth0-universal-login/new-experience',
     ],
-    to: '/authenticate/login/auth0-universal-login/new-experience',
+    to: '/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/universal-experience',
   },
   {
     from: [
       '/universal-login/classic-experience',
       '/universal-login/classic',
       '/login/universal-login/classic-experience',
+      '/authenticate/login/auth0-universal-login/classic-experience',
     ],
-    to: '/authenticate/login/auth0-universal-login/classic-experience',
+    to: '/authenticate/login/auth0-universal-login/universal-login-vs-classic-login/classic-experience',
   },
   {
     from: [
@@ -5921,8 +6246,9 @@ const redirects = [
       '/application-auth/legacy/server-side-web',
       '/flows/add-login-auth-code-flow',
       '/login/authentication/add-login-auth-code-flow',
+      '/get-started/authentication-and-authorization-flow/add-login-auth-code-flow',
     ],
-    to: '/get-started/authentication-and-authorization-flow/add-login-auth-code-flow',
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow/add-login-auth-code-flow',
   },
   {
     from: [
@@ -5939,8 +6265,9 @@ const redirects = [
       '/flows/guides/mobile-login-flow/add-login-using-mobile-login-flow',
       '/flows/add-login-using-the-authorization-code-flow-with-pkce',
       '/login/authentication/add-login-using-the-authorization-code-flow-with-pkce',
+      '/get-started/authentication-and-authorization-flow/add-login-using-the-authorization-code-flow-with-pkce',
     ],
-    to: '/get-started/authentication-and-authorization-flow/add-login-using-the-authorization-code-flow-with-pkce',
+    to: '/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce/add-login-using-the-authorization-code-flow-with-pkce',
   },
   {
     from: [
@@ -5955,8 +6282,9 @@ const redirects = [
       '/application-auth/legacy/client-side-web',
       '/flows/add-login-using-the-implicit-flow-with-form-post',
       '/login/authentication/add-login-using-the-implicit-flow-with-form-post',
+      '/get-started/authentication-and-authorization-flow/add-login-using-the-implicit-flow-with-form-post',
     ],
-    to: '/get-started/authentication-and-authorization-flow/add-login-using-the-implicit-flow-with-form-post',
+    to: '/get-started/authentication-and-authorization-flow/implicit-flow-with-form-post/add-login-using-the-implicit-flow-with-form-post',
   },
   {
     from: [
@@ -6016,6 +6344,14 @@ const redirects = [
       '/login/logout/redirect-users-after-logout',
     ],
     to: '/authenticate/login/logout/redirect-users-after-logout',
+  },
+  {
+    from: ['/back-channel-logout'],
+    to: '/authenticate/login/logout/back-channel-logout',
+  },
+  {
+    from: ['/configure-back-channel-logout'],
+    to: '/authenticate/login/logout/back-channel-logout/configure-back-channel-logout',
   },
 
   /* Monitor - Logs */
@@ -6255,8 +6591,9 @@ const redirects = [
       '/mfa/configure-amazon-sns-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-amazon-sns-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-amazon-sns-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-amazon-sns-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-amazon-sns-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -6265,8 +6602,9 @@ const redirects = [
       '/mfa/configure-esendex-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-esendex-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-esendex-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-esendex-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-esendex-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -6275,8 +6613,9 @@ const redirects = [
       '/mfa/configure-infobip-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-infobip-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-infobip-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-infobip-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-infobip-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -6285,8 +6624,9 @@ const redirects = [
       '/mfa/configure-mitto-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-mitto-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-mitto-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-mitto-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-mitto-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -6295,8 +6635,13 @@ const redirects = [
       '/mfa/configure-telesign-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-telesign-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-telesign-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-telesign-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-telesign-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
+  },
+  {
+    from: ['/mfa/webauthn-as-mfa'],
+    to: '/secure/multi-factor-authentication/webauthn-as-mfa',
   },
   {
     from: [
@@ -6305,8 +6650,9 @@ const redirects = [
       '/mfa/configure-twilio-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-twilio-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-twilio-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-twilio-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-twilio-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -6315,8 +6661,9 @@ const redirects = [
       '/mfa/configure-vonage-as-mfa-sms-provider',
       '/login/mfa/mfa-factors/configure-vonage-as-mfa-sms-provider',
       '/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-vonage-as-mfa-sms-provider',
+      '/customize/hooks/extensibility-points/send-phone-message/configure-vonage-as-mfa-sms-provider',
     ],
-    to: '/customize/hooks/extensibility-points/send-phone-message/configure-vonage-as-mfa-sms-provider',
+    to: '/customize/actions/flows-and-triggers',
   },
   {
     from: [
@@ -6360,12 +6707,13 @@ const redirects = [
     to: '/secure/multi-factor-authentication/adaptive-mfa/enable-adaptive-mfa',
   },
   {
-    from: ['/mfa/adpative-mfa/adaptive-mfa-rule-actions', '/login/mfa/adaptive-mfa/adaptive-mfa-rule-actions'],
-    to: '/secure/multi-factor-authentication/adaptive-mfa/adaptive-mfa-rules',
-  },
-  {
-    from: '/secure/multi-factor-authentication/adaptive-mfa/adaptive-mfa-rule-actions',
-    to: '/secure/multi-factor-authentication/adaptive-mfa/adaptive-mfa-rules'
+    from: [
+      '/mfa/adpative-mfa/adaptive-mfa-rule-actions',
+      '/login/mfa/adaptive-mfa/adaptive-mfa-rule-actions',
+      '/secure/multi-factor-authentication/adaptive-mfa/adaptive-mfa-rule-actions',
+      '/secure/multi-factor-authentication/adaptive-mfa/adaptive-mfa-rules',
+    ],
+    to: '/secure/multi-factor-authentication/adaptive-mfa/customize-adaptive-mfa',
   },
   {
     from: ['/mfa/adaptive-mfa/adaptive-mfa-log-events', '/login/mfa/adaptive-mfa/adaptive-mfa-log-events'],
@@ -6386,8 +6734,9 @@ const redirects = [
       '/mfa/auth0-guardian/install-guardian-sdk',
       '/mfa/guides/guardian/install-guardian-sdk',
       '/login/mfa/auth0-guardian/install-guardian-sdk',
+      '/secure/multi-factor-authentication/auth0-guardian/install-guardian-sdk',
     ],
-    to: '/secure/multi-factor-authentication/auth0-guardian/install-guardian-sdk',
+    to: '/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/install-guardian-sdk',
   },
   {
     from: [
@@ -6414,16 +6763,18 @@ const redirects = [
       '/mfa/guides/guardian/create-enrollment-ticket',
       '/mfa/auth0-guardian/create-custom-enrollment-tickets',
       '/login/mfa/auth0-guardian/create-custom-enrollment-tickets',
+      '/secure/multi-factor-authentication/auth0-guardian/create-custom-enrollment-tickets',
     ],
-    to: '/secure/multi-factor-authentication/auth0-guardian/create-custom-enrollment-tickets',
+    to: '/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/create-custom-enrollment-tickets',
   },
   {
     from: [
       '/mfa/auth0-guardian/guardian-error-code-reference',
       '/mfa/references/guardian-error-code-reference',
       '/login/mfa/auth0-guardian/guardian-error-code-reference',
+      '/secure/multi-factor-authentication/auth0-guardian/guardian-error-code-reference',
     ],
-    to: '/secure/multi-factor-authentication/auth0-guardian/guardian-error-code-reference',
+    to: '/secure/multi-factor-authentication/multi-factor-authentication-developer-resources/guardian-error-code-reference',
   },
   {
     from: [
@@ -6436,14 +6787,23 @@ const redirects = [
     to: '/secure/multi-factor-authentication/customize-mfa',
   },
   {
+    from: ['/secure/multi-factor-authentication/customize-mfa-selection-nul'],
+    to: '/secure/multi-factor-authentication/customize-mfa/customize-mfa-selection-universal-login',
+  },
+  {
+    from: ['/secure/multi-factor-authentication/customize-mfa-enrollments'],
+    to: '/secure/multi-factor-authentication/customize-mfa/customize-mfa-enrollments-universal-login',
+  },
+  {
     from: [
       '/universal-login/multifactor-authentication',
       '/hosted-pages/guardian',
       '/universal-login/guardian',
       '/universal-login/classic-experience/mfa-classic-experience',
       '/login/mfa/customize-mfa-user-pages/mfa-classic-experience',
+      '/secure/multi-factor-authentication/customize-mfa/mfa-classic-experience',
     ],
-    to: '/secure/multi-factor-authentication/customize-mfa/mfa-classic-experience',
+    to: '/secure/multi-factor-authentication/customize-mfa/customize-mfa-classic-login',
   },
   {
     from: [
@@ -6531,8 +6891,9 @@ const redirects = [
       '/multifactor-authentication/api/manage',
       '/mfa/authenticate-with-ropg-and-mfa/manage-authenticator-factors-mfa-api',
       '/login/mfa/ropg-mfa/manage-authenticator-factors-mfa-api',
+      '/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa/manage-authenticator-factors-mfa-api',
     ],
-    to: '/secure/multi-factor-authentication/authenticate-using-ropg-flow-with-mfa/manage-authenticator-factors-mfa-api',
+    to: '/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authenticator-factors-mfa-api',
   },
   {
     from: [
@@ -6650,10 +7011,6 @@ const redirects = [
       '/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-tenant-member-roles',
     ],
     to: '/troubleshoot/product-lifecycle/past-migrations/migrate-tenant-member-roles',
-  },
-  {
-    from: ['/product-lifecycle/deprecations-and-migrations/tenant-hostname-migration'],
-    to: '/troubleshoot/product-lifecycle/deprecations-and-migrations/tenant-hostname-migration',
   },
   {
     from: [
@@ -6825,6 +7182,46 @@ const redirects = [
     ],
     to: '/troubleshoot/product-lifecycle/past-migrations/migrate-from-legacy-auth-flows',
   },
+  {
+    from: [
+      '/product-lifecycle/deprecations-and-migrations/tenant-hostname-migration',
+      '/troubleshoot/product-lifecycle/deprecations-and-migrations/tenant-hostname-migration',
+    ],
+    to: '/troubleshoot/product-lifecycle/past-migrations/tenant-hostname-migration',
+  },
+  {
+    from: ['/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-from-edge-js-extensibility-features'],
+    to: '/troubleshoot/product-lifecycle/past-migrations/migrate-from-edge-js-extensibility-features',
+  },
+
+  {
+    from: ['/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-from-oracledb-extensibility-features'],
+    to: '/troubleshoot/product-lifecycle/past-migrations/migrate-from-oracledb-extensibility-features',
+  },
+
+  {
+    from: ['/troubleshoot/product-lifecycle/deprecations-and-migrations/custom-claims-migration'],
+    to: '/troubleshoot/product-lifecycle/past-migrations/custom-claims-migration',
+  },
+
+  {
+    from: ['/troubleshoot/product-lifecycle/past-migrations/migrate-actions-nodejs-16-to-nodejs-18'],
+    to: '/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-nodejs-16-to-nodejs-18',
+  },
+
+  {
+    from: ['/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-to-nodejs-16'],
+    to: '/troubleshoot/product-lifecycle/past-migrations/migrate-to-nodejs-16',
+  },
+
+  {
+    from: ['/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-from-log-extensions'],
+    to: '/troubleshoot/product-lifecycle/past-migrations/migrate-from-log-extensions',
+  },
+  {
+    from: [`/troubleshoot/product-lifecycle/deprecations-and-migrations/migrate-to-1-hour-expiration`],
+    to: '/troubleshoot/product-lifecycle/past-migrations/migrate-to-1-hour-expiration',
+  },
 
   /* Professional Services */
 
@@ -6880,8 +7277,9 @@ const redirects = [
       '/services/packages',
       '/professional-services/packages',
       '/troubleshoot/professional-services/packages',
+      '/get-started/professional-services/packages',
     ],
-    to: '/get-started/professional-services/packages',
+    to: '/get-started/professional-services',
   },
 
   /* Rules */
@@ -6904,8 +7302,9 @@ const redirects = [
       '/rules/guides/automatically-generate-leads-in-shopify',
       '/rules/guides/automatically-generate-leads-shopify',
       '/rules/automatically-generate-leads-in-shopify',
+      '/customize/rules/use-cases/automatically-generate-leads-in-shopify',
     ],
-    to: '/customize/rules/use-cases/automatically-generate-leads-in-shopify',
+    to: '/customize/actions/use-cases',
   },
   {
     from: ['/rules/guides/cache-resources', '/rules/cache-expensive-resources-in-rules', '/rules/cache-resources'],
@@ -6943,44 +7342,72 @@ const redirects = [
     to: '/customize/rules/debug-rules',
   },
   {
-    from: ['/rules/references/samples', '/rules/examples'],
-    to: '/customize/rules/examples',
+    from: ['/rules/references/samples', '/rules/examples', '/customize/rules/examples'],
+    to: '/customize/actions/actions-overview',
   },
   {
-    from: ['/rules/guides/integrate-user-id-verification', '/rules/integrate-user-id-verification'],
-    to: 'https://marketplace.auth0.com/integrations/onfido-identity-verification',
+    from: [
+      '/rules/guides/integrate-user-id-verification',
+      '/rules/integrate-user-id-verification',
+      '/customize/rules/use-cases/integrate-user-id-verification',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
-    from: ['/rules/guides/integrate-efm-solutions', '/rules/integrate-efm-solutions'],
-    to: '/customize/rules/use-cases/integrate-efm-solutions',
+    from: [
+      '/rules/guides/integrate-efm-solutions',
+      '/rules/integrate-efm-solutions',
+      '/customize/rules/use-cases/integrate-efm-solutions',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
-    from: ['/rules/guides/integrate-erfm-solutions', '/rules/integrate-erfm-solutions'],
-    to: '/customize/rules/use-cases/integrate-erfm-solutions',
+    from: [
+      '/rules/guides/integrate-erfm-solutions',
+      '/rules/integrate-erfm-solutions',
+      '/customize/rules/use-cases/integrate-erfm-solutions',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
-    from: ['/rules/guides/integrate-hubspot', '/rules/integrate-hubspot'],
-    to: '/customize/rules/use-cases/integrate-hubspot',
+    from: [
+      '/rules/guides/integrate-hubspot',
+      '/rules/integrate-hubspot',
+      '/customize/rules/use-cases/integrate-hubspot',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
-    from: ['/rules/guides/integrate-maxmind', '/rules/integrate-maxmind'],
-    to: '/customize/rules/use-cases/integrate-maxmind',
+    from: [
+      '/rules/guides/integrate-maxmind',
+      '/rules/integrate-maxmind',
+      '/customize/rules/use-cases/integrate-maxmind',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
-    from: ['/rules/guides/integrate-mixpanel', '/rules/integrate-mixpanel'],
-    to: '/customize/rules/use-cases/integrate-mixpanel',
+    from: [
+      '/rules/guides/integrate-mixpanel',
+      '/rules/integrate-mixpanel',
+      '/customize/rules/use-cases/integrate-mixpanel',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
-    from: ['/rules/guides/integrate-salesforce', '/rules/integrate-salesforce'],
-    to: '/customize/rules/use-cases/integrate-salesforce',
+    from: [
+      '/rules/guides/integrate-salesforce',
+      '/rules/integrate-salesforce',
+      '/customize/rules/use-cases/integrate-salesforce',
+    ],
+    to: '/customize/actions/use-cases',
   },
   {
     from: ['/rules/current/redirect', '/rules/redirect', '/rules/guides/redirect', '/rules/redirect-users'],
     to: '/customize/rules/redirect-users',
   },
   {
-    from: ['/rules/references/use-cases', '/rules/use-cases'],
-    to: '/customize/rules/use-cases',
+    from: ['/rules/references/use-cases', '/rules/use-cases', '/customize/rules/use-cases'],
+    to: '/customize/actions/use-cases',
   },
   {
     from: ['/rules/current/management-api', '/rules/guides/management-api', '/rules/use-management-api'],
@@ -6998,8 +7425,9 @@ const redirects = [
       '/scenarios/rapleaf-salesforce',
       '/monitor-auth0/track-new-leads-in-salesforce',
       '/rules/use-cases/track-new-leads-in-salesforce',
+      '/customize/rules/use-cases/track-new-leads-in-salesforce',
     ],
-    to: '/customize/rules/use-cases/track-new-leads-in-salesforce',
+    to: '/customize/actions/use-cases',
   },
   {
     from: [
@@ -7009,8 +7437,9 @@ const redirects = [
       '/scenarios/mixpanel-fullcontact-salesforce',
       '/monitor-auth0/track-new-sign-ups-in-salesforce',
       '/rules/use-cases/track-new-sign-ups-in-salesforce',
+      '/customize/rules/use-cases/track-new-sign-ups-in-salesforce',
     ],
-    to: '/customize/rules/use-cases/track-new-sign-ups-in-salesforce',
+    to: '/customize/actions/use-cases',
   },
   {
     from: ['/rules/raise-errors-from-rules'],
@@ -7315,6 +7744,10 @@ const redirects = [
     to: '/secure/tokens/access-tokens',
   },
   {
+    from: ['/secure/tokens/access-tokens/token-binding'],
+    to: '/get-started/applications/configure-sender-constraining',
+  },
+  {
     from: [
       '/tokens/guides/validate-access-tokens',
       '/api-auth/tutorials/verify-access-token',
@@ -7372,32 +7805,36 @@ const redirects = [
       '/tokens/management-api-access-tokens/get-management-api-access-tokens-for-production',
       '/api/management/v2/get-access-tokens-for-production',
       '/security/tokens/access-tokens/get-management-api-access-tokens-for-production',
+      '/secure/tokens/access-tokens/get-management-api-access-tokens-for-production',
     ],
-    to: '/secure/tokens/access-tokens/get-management-api-access-tokens-for-production',
+    to: '/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-production',
   },
   {
     from: [
       '/tokens/management-api-access-tokens/get-management-api-access-tokens-for-testing',
       '/api/management/v2/get-access-tokens-for-test',
       '/security/tokens/access-tokens/get-management-api-access-tokens-for-testing',
+      '/secure/tokens/access-tokens/get-management-api-access-tokens-for-testing',
     ],
-    to: '/secure/tokens/access-tokens/get-management-api-access-tokens-for-testing',
+    to: '/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-access-tokens-for-testing',
   },
   {
     from: [
       '/tokens/management-api-access-tokens/get-management-api-tokens-for-single-page-applications',
       '/api/management/v2/get-access-tokens-for-spas',
       '/security/tokens/access-tokens/get-management-api-tokens-for-single-page-applications',
+      '/secure/tokens/access-tokens/get-management-api-tokens-for-single-page-applications',
     ],
-    to: '/secure/tokens/access-tokens/get-management-api-tokens-for-single-page-applications',
+    to: '/secure/tokens/access-tokens/management-api-access-tokens/get-management-api-tokens-for-single-page-applications',
   },
   {
     from: [
       '/api/management/v2/tokens-flows',
       '/tokens/management-api-access-tokens/changes-in-auth0-management-apiv2-tokens',
       '/security/tokens/access-tokens/changes-in-auth0-management-apiv2-tokens',
+      '/secure/tokens/access-tokens/changes-in-auth0-management-apiv2-tokens',
     ],
-    to: '/secure/tokens/access-tokens/changes-in-auth0-management-apiv2-tokens',
+    to: '/secure/tokens/access-tokens/management-api-access-tokens/changes-in-auth0-management-apiv2-tokens',
   },
   {
     from: [
@@ -7593,7 +8030,14 @@ const redirects = [
     to: '/troubleshoot/customer-support',
   },
   {
-    from: ['/support/support-overview', '/support/support-plans'],
+    from: [
+      '/support/support-overview',
+      '/support/support-plans',
+      '/support/support-procedures',
+      '/troubleshoot/customer-support/support-procedures',
+      '/support/support-hours-and-languages',
+      '/troubleshoot/customer-support/support-hours-and-languages',
+    ],
     to: '/troubleshoot/customer-support/support-plans',
   },
   {
@@ -7657,14 +8101,6 @@ const redirects = [
   {
     from: ['/support/support-channels'],
     to: '/troubleshoot/customer-support/support-channels',
-  },
-  {
-    from: ['/support/support-procedures'],
-    to: '/troubleshoot/customer-support/support-procedures',
-  },
-  {
-    from: ['/support/support-hours-and-languages'],
-    to: '/troubleshoot/customer-support/support-hours-and-languages',
   },
   {
     from: ['/support/software-updates'],
@@ -7739,8 +8175,9 @@ const redirects = [
       '/policies/rate-limits-api',
       '/policies/authentication-api-endpoint-rate-limits',
       '/support/policies/rate-limit-policy/authentication-api-endpoint-rate-limits',
+      '/troubleshoot/customer-support/operational-policies/rate-limit-policy/authentication-api-endpoint-rate-limits',
     ],
-    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy/authentication-api-endpoint-rate-limits',
+    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy',
   },
   {
     from: [
@@ -7749,8 +8186,9 @@ const redirects = [
       '/policies/rate-limits-mgmt-api',
       '/policies/management-api-endpoint-rate-limits',
       '/support/policies/rate-limit-policy/management-api-endpoint-rate-limits',
+      '/troubleshoot/customer-support/operational-policies/rate-limit-policy/management-api-endpoint-rate-limits',
     ],
-    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy/management-api-endpoint-rate-limits',
+    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy',
   },
   {
     from: [
@@ -7759,8 +8197,15 @@ const redirects = [
       '/connections/database/rate-limits',
       '/support/policies/database-connections-rate-limits',
       '/support/policies/rate-limit-policy/database-connections-rate-limits',
+      '/troubleshoot/customer-support/operational-policies/rate-limit-policy/database-connections-rate-limits',
     ],
-    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy/database-connections-rate-limits',
+    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy',
+  },
+  {
+    from: [
+      '/troubleshoot/customer-support/operational-policies/rate-limit-policy/understand-rate-limit-burst-capability',
+    ],
+    to: '/troubleshoot/customer-support/operational-policies/rate-limit-policy',
   },
   {
     from: [
@@ -7774,8 +8219,12 @@ const redirects = [
     to: '/troubleshoot/customer-support/operational-policies/entity-limit-policy',
   },
   {
-    from: ['/support/support-center-users', '/dashboard-access/support-center-users'],
-    to: '/get-started/manage-dashboard-access/support-center-users',
+    from: [
+      '/support/support-center-users',
+      '/dashboard-access/support-center-users',
+      '/get-started/manage-dashboard-access/support-center-users',
+    ],
+    to: '/get-started/manage-dashboard-access/feature-access-by-role',
   },
 
   /* Troubleshoot */
@@ -8003,6 +8452,7 @@ const redirects = [
       '/troubleshoot/guides/generate-har-files',
       '/troubleshoot/generate-and-analyze-har-files',
       '/troubleshoot/tools/generate-and-analyze-har-files',
+      '/troubleshoot/troubleshooting-tools/sanitize-http-traces',
     ],
     to: '/troubleshoot/troubleshooting-tools/generate-and-analyze-har-files',
   },
@@ -8416,20 +8866,30 @@ const redirects = [
     to: '/manage-users/user-search',
   },
   {
-    from: ['/users/search/v3/query-syntax', '/users/user-search/user-search-query-syntax'],
-    to: '/manage-users/user-search/user-search-query-syntax',
+    from: [
+      '/users/search/v3/query-syntax',
+      '/users/user-search/user-search-query-syntax',
+    ],
+    to:  '/manage-users/user-search/user-search-query-syntax',
   },
   {
-    from: ['/api/management/v2/user-search', '/users/search/v2', '/api/v2/user-search', '/users/user-search/v2'],
-    to: '/manage-users/user-search/v2',
+    from: [
+      '/api/management/v2/user-search',
+      '/users/search/v2',
+      '/api/v2/user-search',
+      '/users/user-search/v2',
+      '/manage-users/user-search/v2',
+    ],
+    to: '/manage-users/user-search',
   },
   {
     from: [
       '/api/management/v2/query-string-syntax',
       '/users/search/v2/query-syntax',
       '/users/user-search/v2/query-syntax',
+      '/manage-users/user-search/v2/query-syntax',
     ],
-    to: '/manage-users/user-search/v2/query-syntax',
+    to: '/manage-users/user-search',
   },
   {
     from: [
@@ -8486,92 +8946,162 @@ const redirects = [
   /* Videos */
 
   {
-    from: ['/video-series/main/videos'],
-    to: '/videos',
+    from: ['/video-series/main/videos', '/videos'],
+    to: '/articles',
   },
   {
-    from: ['/videos/learn-identity'],
-    to: '/videos/learn-identity-series',
+    from: ['/videos/learn-identity', '/videos/learn-identity-series'],
+    to: '/articles',
   },
   {
     from: [
       '/videos/learn-identity/01-introduction-to-identity',
       '/videos/learn-identity-series/learn-identity-series/introduction-to-identity',
+      '/videos/learn-identity-series/introduction-to-identity',
     ],
-    to: '/videos/learn-identity-series/introduction-to-identity',
+    to: '/articles',
   },
   {
-    from: ['/videos/learn-identity/02-oidc-and-oauth'],
-    to: '/videos/learn-identity-series/openid-connect-and-oauth2',
+    from: ['/videos/learn-identity/02-oidc-and-oauth', '/videos/learn-identity-series/openid-connect-and-oauth2'],
+    to: '/articles',
   },
   {
-    from: ['/videos/learn-identity/03-web-sign-in'],
-    to: '/videos/learn-identity-series/web-sign-in',
+    from: ['/videos/learn-identity/03-web-sign-in', '/videos/learn-identity-series/web-sign-in'],
+    to: '/articles',
   },
   {
-    from: ['/videos/learn-identity/04-calling-an-api'],
-    to: '/videos/learn-identity-series/calling-an-api',
+    from: ['/videos/learn-identity/04-calling-an-api', '/videos/learn-identity-series/calling-an-api'],
+    to: '/articles',
   },
   {
-    from: ['/videos/learn-identity/05-desktop-and-mobile-apps'],
-    to: '/videos/learn-identity-series/desktop-and-mobile-apps',
+    from: [
+      '/videos/learn-identity/05-desktop-and-mobile-apps',
+      '/videos/learn-identity-series/desktop-and-mobile-apps',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/learn-identity/06-single-page-apps'],
-    to: '/videos/learn-identity-series/single-page-apps',
+    from: ['/videos/learn-identity/06-single-page-apps', '/videos/learn-identity-series/single-page-apps'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started'],
-    to: '/videos/get-started-series',
+    from: ['/videos/get-started', '/videos/get-started-series'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/01-architecture-your-tenant'],
-    to: '/videos/get-started-series/architect-your-tenant',
+    from: ['/videos/get-started/01-architecture-your-tenant', '/videos/get-started-series/architect-your-tenant'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/02-provision-user-stores'],
-    to: '/videos/get-started-series/provision-user-stores',
+    from: ['/videos/get-started/02-provision-user-stores', '/videos/get-started-series/provision-user-stores'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/03-provision-import-users'],
-    to: '/videos/get-started-series/provision-import-users',
+    from: ['/videos/get-started/03-provision-import-users', '/videos/get-started-series/provision-import-users'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/04_01-authenticate-how-it-works'],
-    to: '/videos/get-started-series/authenticate-how-it-works',
+    from: [
+      '/videos/get-started/04_01-authenticate-how-it-works',
+      '/videos/get-started-series/authenticate-how-it-works',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/04_02-authenticate-spa-example', '/videos/get-started/04_01-authenticate-spa-example'],
-    to: '/videos/get-started-series/authenticate-spa-example',
+    from: [
+      '/videos/get-started/04_02-authenticate-spa-example',
+      '/videos/get-started/04_01-authenticate-spa-example',
+      '/videos/get-started-series/authenticate-spa-example',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/05_01-authorize-id-tokens-access-control'],
-    to: '/videos/get-started-series/authorize-id-tokens-and-access-control',
+    from: [
+      '/videos/get-started/05_01-authorize-id-tokens-access-control',
+      '/videos/get-started-series/authorize-id-tokens-and-access-control',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/05_02-authorize-get-validate-id-tokens'],
-    to: '/videos/get-started-series/authorize-get-and-validate-id-tokens',
+    from: [
+      '/videos/get-started/05_02-authorize-get-validate-id-tokens',
+      '/videos/get-started-series/authorize-get-and-validate-id-tokens',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/06-user-profiles'],
-    to: '/videos/get-started-series/learn-user-profiles',
+    from: ['/videos/get-started/06-user-profiles', '/videos/get-started-series/learn-user-profiles'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/07_01-brand-how-it-works'],
-    to: '/videos/get-started-series/brand-how-it-works',
+    from: ['/videos/get-started/07_01-brand-how-it-works', '/videos/get-started-series/brand-how-it-works'],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/07_02-brand-signup-login-pages'],
-    to: '/videos/get-started-series/brand-signup-and-login-pages',
+    from: [
+      '/videos/get-started/07_02-brand-signup-login-pages',
+      '/videos/get-started-series/brand-signup-and-login-pages',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/08-brand-emails-error-pages'],
-    to: '/videos/get-started-series/brand-emails-and-error-pages',
+    from: [
+      '/videos/get-started/08-brand-emails-error-pages',
+      '/videos/get-started-series/brand-emails-and-error-pages',
+    ],
+    to: '/articles',
   },
   {
-    from: ['/videos/get-started/10-logout'],
-    to: '/videos/get-started-series/learn-logout',
+    from: ['/videos/get-started/10-logout', '/videos/get-started-series/learn-logout'],
+    to: '/articles',
   },
+
+  /* Forms */
+
+  {
+    from: ['/customize/forms/intro-to-forms', '/customize/forms/fields'],
+    to: '/customize/forms/nodes-and-components',
+  },
+
+  {
+    from: ['/customize/phone/twilio-phone-providers'],
+    to: '/customize/phone-messages/configure-phone-messaging-providers/configure-twilio-as-a-phone-messaging-provider',
+  },
+  {
+    from: ['/authenticate/single-sign-on/self-service-SSO'],
+    to: '/authenticate/enterprise-connections/self-service-SSO',
+  },
+  
+  {
+	from: [
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/branding-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/client-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/organization-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/prompt-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/screen-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/tenant-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/transaction-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/untrusted-data-settings',
+	  '/customize/login-pages/advanced-customizations/getting-started/context-data/user-settings',
+	  '/customize/login-pages/advanced-customizations/screens',
+	  '/customize/login-pages/advanced-customizations/screens/signup-id',
+	  '/customize/login-pages/advanced-customizations/screens/signup-password',
+	  '/customize/login-pages/advanced-customizations/screens/login-id',
+	  '/customize/login-pages/advanced-customizations/screens/login-password',
+	  '/customize/login-pages/advanced-customizations/screens/login-passwordless-email-code',
+	  '/customize/login-pages/advanced-customizations/screens/login-passwordless-sms-otp',
+	  '/customize/login-pages/advanced-customizations/screens/passkey-enrollment',
+	  '/customize/login-pages/advanced-customizations/screens/passkey-enrollment-local',
+	  '/customize/login-pages/advanced-customizations/screens/phone-identifier-enrollment',
+	  '/customize/login-pages/advanced-customizations/screens/phone-identifier-challenge',
+	  '/customize/login-pages/advanced-customizations/screens/email-identifier-challenge',
+	  '/customize/login-pages/advanced-customizations/screens/interstitial-captcha',
+	  '/customize/login-pages/advanced-customizations/getting-started/sdk-quickstart/auth0-acul-js-sdk-shared-properties',
+	],
+	to: '/customize/login-pages/advanced-customizations',
+  },
+  
 ];
 
 module.exports = redirects;

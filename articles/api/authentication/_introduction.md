@@ -2,7 +2,7 @@
 
 The Authentication API enables you to manage all aspects of user identity when you use Auth0. It offers endpoints so your users can log in, sign up, log out, access APIs, and more. 
 
-The API supports various identity protocols, like <dfn data-key="openid">[OpenID Connect](/protocols/oidc)</dfn>, [OAuth 2.0](/protocols/oauth2), and <dfn data-key="security-assertion-markup-language">[SAML](/protocols/saml)</dfn>.
+The API supports various identity protocols, like <dfn data-key="openid">[OpenID Connect](/protocols/oidc)</dfn>, <dfn data-key="oath2"> [OAuth 2.0](/protocols/oauth2)</dfn>, <dfn data-key="fapi">[FAPI](/secure/highly-regulated-identity#advanced-security-with-openid-connect-fapi-)</dfn> and <dfn data-key="security-assertion-markup-language">[SAML](/protocols/saml)</dfn>.
 
 :::note
 This API is designed for people who feel comfortable integrating with RESTful APIs. If you prefer a more guided approach check out our [Quickstarts](/quickstarts) or our [Libraries](/libraries).
@@ -14,10 +14,12 @@ The Authentication API is served over HTTPS. All URLs referenced in the document
 
 ## Authentication methods
 
-You have three options for authenticating with this API:
+You have five options for authenticating with this API:
 - OAuth2 <dfn data-key="access-token">Access Token</dfn>
+- Client ID and Client Assertion (confidential applications)
 - Client ID and Client Secret (confidential applications)
 - Client ID (public applications)
+- mTLS Authentication (confidential applications)
 
 ### OAuth2 Access Token
 
@@ -25,9 +27,12 @@ Send a valid Access Token in the `Authorization` header, using the `Bearer` auth
 
 An example is the [Get User Info endpoint](#get-user-info). In this scenario, you get an Access Token when you authenticate a user, and then you can make a request to the [Get User Info endpoint](#get-user-info), using that token in the `Authorization` header, in order to retrieve the user's profile.
 
+### Client ID and Client Assertion
+Generate a [client assertion](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authenticate-with-private-key-jwt) containing a signed JSON Web Token (JWT) to authenticate. In the body of the request, include your Client ID, a `client_assertion_type` parameter with the value `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, and a `client_assertion` parameter with your signed assertion. Review [Private Key JWT]( https://auth0.com/docs/get-started/authentication-and-authorization-flow/authenticate-with-private-key-jwt) for examples.
+
 ### Client ID and Client Secret
 
-Send the Client ID and Client Secret. The method you can use to send this data is determined by the [Token Endpoint Authentication Method](https://auth0.com/docs/get-started/applications/confidential-and-public-applications/view-application-type) configured for your application.
+Send the Client ID and Client Secret. The method you can use to send this data is determined by the [Token Endpoint Authentication Method](/get-started/applications/confidential-and-public-applications/view-application-type) configured for your application.
 
 If you are using **Post**, you must send this data in the JSON body of your request.
 
@@ -39,7 +44,19 @@ An example is the [Revoke Refresh Token endpoint](#revoke-refresh-token). This o
 
 Send the Client ID. For public applications (applications that cannot hold credentials securely, such as SPAs or mobile apps), we offer some endpoints that can be accessed using only the Client ID.
 
-An example is the [Implicit Grant](#implicit-grant).
+An example is the [Implicit Grant](#implicit-flow).
+
+### mTLS Authentication
+
+Generate a certificate, either [self-signed](/get-started/applications/configure-mtls/configure-mtls-for-a-client#self-signed-certificates) or [certificate authority signed](/get-started/applications/configure-mtls/configure-mtls-for-a-client#certificate-authority-signed-certificates). Then, [set up the customer edge network](/get-started/applications/configure-mtls/set-up-the-customer-edge) that performs the mTLS handshake. 
+
+Once your edge network verifies the certificate, forward the request to the Auth0 edge network with the following headers:
+
+- The Custom Domain API key as the `cname-api-key` header.
+- The client certificate as the `client-certificate` header.
+- The client certificate CA verification status as the `client-certificate-ca-verified` header. For more information, see [Forward the Request](/get-started/applications/configure-mtls/set-up-the-customer-edge#forward-the-request-).
+
+To learn more, read [Authenticate with mTLS](/get-started/authentication-and-authorization-flow/authenticate-with-mtls). 
 
 ## Parameters
 
@@ -68,16 +85,38 @@ Each request should be sent with a Content-Type of `application/json`.
 
 You can test the endpoints using the [Authentication API Debugger](/extensions/authentication-api-debugger).
 
-### Test with the Authentication API Debugger
+### Authentication API Debugger
 
 The [Authentication API Debugger](/extensions/authentication-api-debugger) is an Auth0 extension you can use to test several endpoints of the Authentication API. 
 
-If it's the first time you use it, you have to install it using the [dashboard](${manage_url}/#/extensions). Once you do, you are ready to configure your app's settings and run your tests. 
+<%= include('../../_includes/_test-this-endpoint') %>
 
-Note that its URL varies according to your tenant's region:
-- <a href="https://${account.tenant}.us.webtask.io/auth0-authentication-api-debugger" target="_blank">US West</a>
-- <a href="https://${account.tenant}.eu.webtask.io/auth0-authentication-api-debugger" target="_blank">Europe Central</a>
-- <a href="https://${account.tenant}.au.webtask.io/auth0-authentication-api-debugger" target="_blank">Australia</a>
+### Configure Connections
+
+1. On the *Configuration* tab, set the fields **Application** (select the application you want to use for the test) and **Connection** (the name of the social connection to use).
+
+1. Copy the <dfn data-key="callback">**Callback URL**</dfn> and set it as part of the **Allowed Callback URLs** of your [Application Settings](${manage_url}/#/applications).
+
+1. At the *OAuth2 / OIDC* tab, select **OAuth2 / OIDC Login**.
+
+### Endpoint options
+Configure other endpoints with the following options:
+
+- Passwordless: On the *OAuth2 / OIDC* tab, set **Username** to the user's phone number if `connection=sms`, or the user's email if `connection=email`, and **Password** to the user's verification code. Click **Resource Owner Endpoint**.
+- SAML SSO:  On the *Other Flows* tab, select **SAML**.
+- WS-Federation: On the *Other Flows* tab, select **WS-Federation**.
+- Logout: On the *Other Flows* tab, select **Logout**, or **Logout (Federated)** to log the user out of the identity provider as well.
+- Legacy Login: On the *OAuth2 / OIDC* tab, set the fields **ID Token**, **Refresh Token** and **Target Client ID**. Click **Delegation**.
+- Legacy Delegation: On the *OAuth2 / OIDC* tab, set **Username** and **Password**. Click **Resource Owner Endpoint**.
+- Legacy Resource Owner:  On the *OAuth2 / OIDC* tab, set the **Username** and **Password**, then select **Resource Owner Endpoint**.
+
+### Authentications flows
+
+Configure authentication flows with the following options:
+- Authorization Code Flow: On the *OAuth2 / OIDC* tab, set the field **Authorization Code** to the code you retrieved from [Authorization Code Grant](/get-started/authentication-and-authorization-flow/authorization-code-flow), and the **Code Verifier** to the key. Click **OAuth2 Code Exchange**.
+- Authorization Code Flow + PKCE: On the *OAuth2 / OIDC* tab, set the field **Authorization Code** to the code you retrieved from [Authorization Code Grant](/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce), and the **Code Verifier** to the key. Click **OAuth2 Code Exchange**.
+- Client Credential Flow:  On the *OAuth2 / OIDC* tab, select **OAuth2 Client Credentials**.
+
 
 ## Errors
 

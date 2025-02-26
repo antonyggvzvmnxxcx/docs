@@ -29,33 +29,40 @@ useCase: quickstart
 
 ### Configure the `Auth0Provider` component
 
-Under the hood, the Auth0 React SDK uses [React Context](https://reactjs.org/docs/context.html) to manage the authentication state of your users. One way to integrate Auth0 with your React app is to wrap your root component with an `Auth0Provider` that you can import from the SDK.
+Under the hood, the Auth0 React SDK uses <a href="https://reactjs.org/docs/context.html" target="_blank" rel="noreferrer">React Context</a> to manage the authentication state of your users. One way to integrate Auth0 with your React app is to wrap your root component with an `Auth0Provider` that you can import from the SDK.
 
 Open `src/index.tsx` and wrap the `App` component in the `Auth0Provider` component.
 
 ```javascript
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { createRoot } from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
+import App from './App';
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+
+root.render(
   <Auth0Provider
     domain="${account.namespace}"
     clientId="${account.clientId}"
-    redirectUri="YOUR_PACKAGE_ID://${account.namespace}/capacitor/YOUR_PACKAGE_ID/callback"
+    useRefreshTokens={true}
+    useRefreshTokensFallback={false}
+    authorizationParams={{
+      redirect_uri: "YOUR_PACKAGE_ID://${account.namespace}/capacitor/YOUR_PACKAGE_ID/callback"
+    }}
   >
     <App />
-  </Auth0Provider>,
-  document.getElementById('root')
+  </Auth0Provider>
 );
 ```
 
 The `Auth0Provider` component takes the following props:
 
-- `domain`: The "domain" value present under the "Settings" of the application you created in your Auth0 dashboard, or your custom domain if using Auth0's [Custom Domains feature](http://localhost:3000/docs/custom-domains)
+- `domain`: The "domain" value present under the "Settings" of the application you created in your Auth0 dashboard, or your custom domain if using Auth0's <a href="http://localhost:3000/docs/custom-domains" target="_blank" rel="noreferrer">Custom Domains feature</a>
 - `clientId`: The "client ID" value present under the "Settings" of the application you created in your Auth0 dashboard
-- `redirectUri`: The URL to where you'd like to redirect your users after they authenticate with Auth0.
+- `useRefreshTokens`: To use auth0-react with Ionic on Android and iOS, it's required to enable refresh tokens.
+- `useRefreshTokensFallback`: To use auth0-react with Ionic on Android and iOS, it's required to disable the iframe fallback.
+- `authorizationParams.redirect_uri`: The URL to where you'd like to redirect your users after they authenticate with Auth0.
 
 <%= include('../_includes/ionic/_note_storage') %>
 
@@ -75,14 +82,18 @@ import { Browser } from '@capacitor/browser';
 import { IonButton } from '@ionic/react';
 
 const LoginButton: React.FC = () => {
-  const { buildAuthorizeUrl } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
 
   const login = async () => {
-    // Ask auth0-react to build the login URL
-    const url = await buildAuthorizeUrl();
-
-    // Redirect using Capacitor's Browser plugin
-    await Browser.open({ url });
+    await loginWithRedirect({
+      async openUrl(url) {
+         // Redirect using Capacitor's Browser plugin
+        await Browser.open({
+          url,
+          windowName: "_self"
+        });
+      }
+    });
   };
 
   return <IonButton onClick={login}>Log in</IonButton>;
@@ -94,8 +105,8 @@ export default LoginButton;
 This component:
 
 - defines a template with a simple button that logs the user in when clicked
-- uses `buildAuthorizeUrl` to construct a URL to Auth0's Universal Login page
-- uses Capacitor's Browser plugin to open the URL and show the login page to the user
+- uses `loginWithRedirect` to login using Auth0's Universal Login page
+- uses the `openUrl` callback to use Capacitor's Browser plugin to open the URL and show the login page to the user
 
 <%= include('../../_includes/_auth0-react-classes-info.md') %>
 
@@ -158,14 +169,21 @@ import { IonButton } from '@ionic/react';
 const logoutUri = 'YOUR_PACKAGE_ID://${account.namespace}/capacitor/YOUR_PACKAGE_ID/callback';
 
 const LogoutButton: React.FC = () => {
-  const { buildLogoutUrl, logout } = useAuth0();
+  const { logout } = useAuth0();
 
   const doLogout = async () => {
-    // Open the browser to perform a logout
-    await Browser.open({ url: buildLogoutUrl({ returnTo: logoutUri }) });
-
-    // Ask the SDK to log out locally, but not do the redirect
-    logout({ localOnly: true });
+    await logout({
+      logoutParams: {
+        returnTo: logoutUri,
+      },
+      async openUrl(url) {
+         // Redirect using Capacitor's Browser plugin
+        await Browser.open({
+          url,
+          windowName: "_self"
+        });
+      }
+    });
   };
 
   return <IonButton onClick={doLogout}>Log out</IonButton>;
@@ -180,7 +198,7 @@ Add the `LogoutButton` component to your application. When you click it, verify 
 
 ## Show User Profile Information
 
-The Auth0 React SDK helps you retrieve the [profile information](https://auth0.com/docs/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user` property exposed by the `useAuth0()` hook. Take this `Profile` component as an example of how to use it:
+The Auth0 React SDK helps you retrieve the <a href="https://auth0.com/docs/users/concepts/overview-user-profile" target="_blank" rel="noreferrer">profile information</a> associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user` property exposed by the `useAuth0()` hook. Take this `Profile` component as an example of how to use it:
 
 ```js
 import { useAuth0 } from '@auth0/auth0-react';
@@ -206,5 +224,5 @@ export default Profile;
 The `user` property contains sensitive information and artifacts related to the user's identity. As such, its availability depends on the user's authentication status. To prevent any render errors, use the `isAuthenticated` property from `useAuth0()` to check if Auth0 has authenticated the user before React renders any component that consumes the `user` property. Ensure that the SDK has completed loading before accessing the `isAuthenticated` property, by checking that `isLoading` is `false`.
 
 :::panel Checkpoint
-Add the `Profile` component to your application, and verify that you can display the `user.name` or [any other `user` property](https://auth0.com/docs/users/references/user-profile-structure#user-profile-attributes) within a component correctly after you have logged in.
+Add the `Profile` component to your application, and verify that you can display the `user.name` or <a href="https://auth0.com/docs/users/references/user-profile-structure#user-profile-attributes" target="_blank" rel="noreferrer">any other `user` property</a> within a component correctly after you have logged in.
 :::

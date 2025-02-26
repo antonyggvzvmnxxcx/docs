@@ -17,12 +17,12 @@ files:
 
 <!-- markdownlint-disable MD041 MD025 -->
 
-# Add authorization to a Go application.
-This guide demonstrates how to integrate Auth0 with any new or existing Go API application using the [go-jwt-middleware](https://github.com/auth0/go-jwt-middleware) package.
+# Add Authorization to Your Go Application
+This guide demonstrates how to integrate Auth0 with any new or existing Go API application using the <a href="https://github.com/auth0/go-jwt-middleware" target="_blank" rel="noreferrer">go-jwt-middleware</a> package.
 
 If you have not created an API in your Auth0 dashboard yet, use the interactive selector to create a new Auth0 API or select an existing API for your project.
 
-To set up your first API through the Auth0 dashboard, review [our getting started guide](get-started/auth0-overview/set-up-apis).
+To set up your first API through the Auth0 dashboard, review <a href="get-started/auth0-overview/set-up-apis" target="_blank" rel="noreferrer">our getting started guide</a>.
 
 Each Auth0 API uses the API Identifier, which your application needs to validate the access token.
 
@@ -40,11 +40,11 @@ Add a `go.mod` file to list all the necessary dependencies.
 
 module 01-Authorization-RS256
 
-go 1.16
+go 1.21
 
 require (
-	github.com/auth0/go-jwt-middleware/v2 v2.0.0
-	github.com/joho/godotenv v1.4.0
+	github.com/auth0/go-jwt-middleware/v2 v2.2.0
+	github.com/joho/godotenv v1.5.1
 )
 ```
 
@@ -70,9 +70,8 @@ AUTH0_AUDIENCE='${apiIdentifier}'
 
 ## Create a middleware to validate access tokens {{{ data-action=code data-code="middleware/jwt.go" }}}
 
-The `EnsureValidToken` middleware function validates the access token. You can be apply this function to any endpoints you wish to protect.
+The `EnsureValidToken` middleware function validates the access token. You can apply this function to any endpoints you wish to protect.
 If the token is valid, the endpoint releases the resources. If the token is not valid, the API returns a `401 Authorization` error.
-otherwise a `401 Authorization` error will be returned.
 
 Setup the **go-jwt-middleware** middleware to verify access tokens from incoming requests.
 
@@ -108,8 +107,8 @@ Now that you have configured your application, run your application to verify th
 :::checkpoint-failure
 If your application did not start successfully:
 * Verify you added the token as the `Authorization` header
-* Ensure the token has the correct scopes. Verify with [jwt.io](https://jwt.io/).
+* Ensure the token has the correct scopes. Verify with <a href="https://jwt.io/" target="_blank" rel="noreferrer">jwt.io</a>.
 
-Still having issues? Check out our [documentation](https://auth0.com/docs) or visit our [community page](https://community.auth0.com) to get more help.
+Still having issues? Check out our <a href="https://auth0.com/docs" target="_blank" rel="noreferrer">documentation</a> or visit our <a href="https://community.auth0.com" target="_blank" rel="noreferrer">community page</a> to get more help.
 :::
 ::::

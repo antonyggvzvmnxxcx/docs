@@ -18,6 +18,10 @@ useCase: quickstart
 
 <!-- markdownlint-disable MD002 MD041 -->
 
+:::note
+Visit the <a href="https://developer.auth0.com/resources/guides/spa/vue/basic-authentication#integrate-vue-js-with-an-api-server" target="_blank" rel="noreferrer">Integrate Vue.js with an API Server</a> section of the <a href="https://developer.auth0.com/resources/guides/spa/vue/basic-authentication" target="_blank" rel="noreferrer">Vue.js Authentication By Example</a> guide for a deep dive into calling a protected API from Vue. This guide allows you to set up a sample API server using a backend technology of your choice, effectively creating a full-stack application.
+:::
+
 <%= include('../_includes/_calling_api_create_api') %>
 
 ## Configuring the plugin
@@ -31,9 +35,11 @@ const app = createApp(App);
 app.use(
   createAuth0({
     domain: "${account.namespace}",
-    client_id: "${account.clientId}",
-    redirect_uri: window.location.origin,
-    audience: "${apiIdentifier}",
+    clientId: "${account.clientId}",
+    authorizationParams: {
+      redirect_uri: window.location.origin,
+      audience: "${apiIdentifier}",
+    }
   })
 );
 

@@ -13,7 +13,7 @@ useCase: quickstart
 
 <%= include('../../../_includes/_api_auth_intro') %>
 
-<%= include('../_includes/_api_create_new', { sampleLink: 'https://github.com/auth0-samples/auth0-aspnetcore-webapi-samples/tree/master/Samples/hs256' }) %>
+<%= include('../_includes/_api_create_new', { sampleLink: 'https://github.com/auth0-samples/auth0-express-api-samples/tree/master/02-Authorization-HS256' }) %>
 
 <%= include('../_includes/_api_auth_preamble') %>
 
@@ -21,7 +21,7 @@ useCase: quickstart
 
 ### Install dependencies
 
-This guide shows you how to protect an Express API using the [express-oauth2-jwt-bearer](https://github.com/auth0/node-oauth2-jwt-bearer/tree/main/packages/express-oauth2-jwt-bearer) middleware. 
+This guide shows you how to protect an Express API using the <a href="https://github.com/auth0/node-oauth2-jwt-bearer/tree/main/packages/express-oauth2-jwt-bearer" target="_blank" rel="noreferrer">express-oauth2-jwt-bearer</a> middleware. 
 
 First install the SDK using npm.
 

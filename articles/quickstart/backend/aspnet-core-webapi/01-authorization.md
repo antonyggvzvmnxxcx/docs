@@ -54,52 +54,38 @@ In your application, register the authentication services:
 2. Make a call to the `AddJwtBearer` method to register the JWT Bearer authentication scheme. Configure your Auth0 domain as the authority, and your Auth0 API identifier as the audience. In some cases the access token will not have a `sub` claim which will lead to `User.Identity.Name` being `null`. If you want to map a different claim to `User.Identity.Name` then add it to `options.TokenValidationParameters` within the `AddAuthentication()` call.
 
 ```csharp
-// Startup.cs
-
-public void ConfigureServices(IServiceCollection services)
+// Program.cs
+var builder = WebApplication.CreateBuilder(args);
+var domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
 {
-    // Some code omitted for brevity...
-
-    string domain = $"https://{Configuration["Auth0:Domain"]}/";
-    services
-        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.Authority = domain;
-            options.Audience = Configuration["Auth0:Audience"];
-            // If the access token does not have a `sub` claim, `User.Identity.Name` will be `null`. Map it to a different claim by setting the NameClaimType below.
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                NameClaimType = ClaimTypes.NameIdentifier
-            };
-        });
-}
+    options.Authority = domain;
+    options.Audience = builder.Configuration["Auth0:Audience"];
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        NameClaimType = ClaimTypes.NameIdentifier
+    };
+});
 ```
 
-To add the authentication and authorization middleware to the middleware pipeline, add a call to the `UseAuthentication` and `UseAuthorization` methods in your Startup's `Configure` method:
+To add the authentication and authorization middleware to the middleware pipeline, add a call to the `UseAuthentication` and `UseAuthorization` methods in your Program.cs file:
 
 ```csharp
-// Startup.cs
+// Program.cs
+var app = builder.Build();
 
-public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseEndpoints(endpoints =>
 {
-    // Some code omitted for brevity...
-
-    app.UseAuthentication();
-    app.UseAuthorization();
-
-    app.UseMvc(routes =>
-    {
-        routes.MapRoute(
-            name: "default",
-            template: "{controller=Home}/{action=Index}/{id?}");
-    });
-}
+    endpoints.MapControllers();
+});
 ```
 
 ### Validate scopes
 
-To make sure that an Access Token contains the correct scope, use the [Policy-Based Authorization](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies) in ASP.NET Core.
+To make sure that an Access Token contains the correct scope, use the <a href="https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies" target="_blank" rel="noreferrer">Policy-Based Authorization</a> in ASP.NET Core.
 
 Create a new authorization requirement called `HasScopeRequirement`. This requirement checks if the `scope` claim issued by your Auth0 tenant is present. If the `scope` claim exists, the requirement checks if the `scope` claim contains the requested scope.
 
@@ -142,29 +128,23 @@ public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
 }
 ```
 
-In your Startup's `ConfigureServices` method, add a call to the `AddAuthorization` method. To add policies for the scopes, call `AddPolicy` for each scope. Also ensure that you register the `HasScopeHandler` as a singleton:
+In your Program.cs file, add a call to the `AddAuthorization` method. To add policies for the scopes, call `AddPolicy` for each scope. Also ensure that you register the `HasScopeHandler` as a singleton:
 
 ```csharp
-// Startup.cs
+// Program.cs
 
-public void ConfigureServices(IServiceCollection services)
+builder.Services.AddAuthorization(options =>
 {
-    //...
+    options.AddPolicy("read:messages", policy => policy.Requirements.Add(new 
+    HasScopeRequirement("read:messages", domain)));
+});
 
-    services.AddAuthorization(options =>
-    {
-        options.AddPolicy("read:messages", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain)));
-    });
-
-    services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
-
-    //...
-}
+builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 ```
 
 ## Protect API Endpoints
 
-The JWT middleware integrates with the standard ASP.NET Core [Authentication](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/) and [Authorization](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/) mechanisms. 
+The JWT middleware integrates with the standard ASP.NET Core <a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/" target="_blank" rel="noreferrer">Authentication</a> and <a href="https://docs.microsoft.com/en-us/aspnet/core/security/authorization/" target="_blank" rel="noreferrer">Authorization</a> mechanisms. 
 
 To secure an endpoint, you need to add the `[Authorize]` attribute to your controller action:
 

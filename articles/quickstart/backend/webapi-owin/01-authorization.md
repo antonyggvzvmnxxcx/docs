@@ -7,7 +7,7 @@ topics:
     - backend
     - webapi-owin
 github:
-    path: Quickstart/01-Authorization
+    path: Quickstart/Sample
 contentType: tutorial
 useCase: quickstart
 ---
@@ -45,7 +45,7 @@ Install-Package Microsoft.Owin.Security.Jwt
 As the OWIN JWT middleware doesn't use Open ID Connect Discovery by default, you will need to provide a custom `IssuerSigningKeyResolver`. To do this, add the following to the `Support/OpenIdConnectSigningKeyResolver.cs` file:
 
 :::note
-Such a custom resolver was previously published as part of the `Auth0.OpenIdConnectSigningKeyResolver` package through Nuget. As [this package is not available anymore](https://github.com/auth0/auth0-aspnet-owin/blob/master/SECURITY-NOTICE.md), you will need to provide this yourself.
+Such a custom resolver was previously published as part of the `Auth0.OpenIdConnectSigningKeyResolver` package through Nuget. As <a href="https://github.com/auth0/auth0-aspnet-owin/blob/master/SECURITY-NOTICE.md" target="_blank" rel="noreferrer">this package is not available anymore</a>, you will need to provide this yourself.
 :::
 
 ```javascript
@@ -132,7 +132,7 @@ public class ScopeAuthorizeAttribute : AuthorizeAttribute
         // Get the claim principal
         ClaimsPrincipal principal = actionContext.ControllerContext.RequestContext.Principal as ClaimsPrincipal;
 
-        // Get the scope clain. Ensure that the issuer is for the correcr Auth0 domain
+        // Get the scope claim. Ensure that the issuer is for the correct Auth0 domain
         var scopeClaim = principal?.Claims.FirstOrDefault(c => c.Type == "scope" && c.Issuer == domain);
         if (scopeClaim != null)
         {

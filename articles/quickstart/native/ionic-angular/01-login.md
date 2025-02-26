@@ -44,7 +44,7 @@ import config from '../../capacitor.config';
 // ..
 
 // Build the URL that Auth0 should redirect back to
-const redirectUri = `<%= "${config.appId}" %>://${account.namespace}/capacitor/<%= "${config.appId}" %>/callback`;
+const redirect_uri = `<%= "${config.appId}" %>://${account.namespace}/capacitor/<%= "${config.appId}" %>/callback`;
 
 // Register AuthModule with your AppModule
 @NgModule({
@@ -57,7 +57,11 @@ const redirectUri = `<%= "${config.appId}" %>://${account.namespace}/capacitor/<
     AuthModule.forRoot({
       domain: "${account.namespace}",
       clientId: "${account.clientId}",
-      redirectUri
+      useRefreshTokens: true,
+      useRefreshTokensFallback: false,
+      authorizationParams: {
+        redirect_uri,
+      }
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
@@ -67,9 +71,11 @@ const redirectUri = `<%= "${config.appId}" %>://${account.namespace}/capacitor/<
 
 The `AuthModule.forRoot` function takes the following configuration:
 
-- `domain`: The "domain" value present under the "Settings" of the application you created in your Auth0 dashboard, or your custom domain if using Auth0's [Custom Domains feature](http://localhost:3000/docs/custom-domains)
+- `domain`: The "domain" value present under the "Settings" of the application you created in your Auth0 dashboard, or your custom domain if using Auth0's <a href="http://localhost:3000/docs/custom-domains" target="_blank" rel="noreferrer">Custom Domains feature</a>
 - `clientId`: The "client ID" value present under the "Settings" of the application you created in your Auth0 dashboard
-- `redirectUri`: The URL to where you'd like to redirect your users after they authenticate with Auth0.
+- `useRefreshTokens`: To use auth0-angular with Ionic on Android and iOS, it's required to enable refresh tokens.
+- `useRefreshTokensFallback`: To use auth0-angular with Ionic on Android and iOS, it's required to disable the iframe fallback.
+- `authorizationParams.redirect_uri`: The URL to where you'd like to redirect your users after they authenticate with Auth0.
 
 <%= include('../_includes/ionic/_note_storage') %>
 
@@ -98,8 +104,11 @@ export class LoginButtonComponent {
 
   login() {
     this.auth
-      .buildAuthorizeUrl()
-      .pipe(mergeMap((url) => Browser.open({ url, windowName: '_self' })))
+      .loginWithRedirect({
+        async openUrl(url: string) {
+          await Browser.open({ url, windowName: '_self' });
+        }
+      })
       .subscribe();
   }
 }
@@ -108,8 +117,8 @@ export class LoginButtonComponent {
 This component:
 
 - defines a template with a simple button that logs the user in when clicked
-- uses `buildAuthorizeUrl` to construct a URL to Auth0's Universal Login page
-- uses Capacitor's Browser plugin to open the URL and show the login page to the user
+- uses `loginWithRedirect` to login using Auth0's Universal Login page
+- uses the `openUrl` callback to use Capacitor's Browser plugin to open the URL and show the login page to the user
 
 ### Handling the callback
 
@@ -162,7 +171,7 @@ export class AppComponent implements OnInit {
 }
 ```
 
-Note that the `appUrlOpen` event callback is wrapped in `ngZone.run`, which means that the changes to observables that occur when `handleRedirectCallback` runs are picked up by the Angular app. Please read [Using Angular with Capacitor](https://capacitorjs.com/docs/guides/angular) for more details. Otherwise, the screen will not update to show the authenticated state after you log in.
+Note that the `appUrlOpen` event callback is wrapped in `ngZone.run`, which means that the changes to observables that occur when `handleRedirectCallback` runs are picked up by the Angular app. Please read <a href="https://capacitorjs.com/docs/guides/angular" target="_blank" rel="noreferrer">Using Angular with Capacitor</a> for more details. Otherwise, the screen will not update to show the authenticated state after you log in.
 
 <%= include('../_includes/ionic/_note_custom_schemes') %>
 
@@ -196,17 +205,15 @@ export class LogoutButtonComponent {
   constructor(public auth: AuthService) {}
 
    logout() {
-    // Use the SDK to build the logout URL
     this.auth
-      .buildLogoutUrl({ returnTo })
-      .pipe(
-        tap((url) => {
-          // Call the logout fuction, but only log out locally
-          this.auth.logout({ localOnly: true });
-          // Redirect to Auth0 using the Browser plugin, to clear the user's session
-          Browser.open({ url });
-        })
-      )
+      .logout({ 
+        logoutParams: {
+          returnTo,
+        },
+        async openUrl(url: string) {
+          await Browser.open({ url });
+        } 
+      })
       .subscribe();
   }
 }
@@ -218,7 +225,7 @@ Add the `LogoutButton` component to your application. When you click it, verify 
 
 ## Show User Profile Information
 
-The Auth0 SDK helps you retrieve the [profile information](https://auth0.com/docs/users/concepts/overview-user-profile) associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user$` property exposed by `AuthService`.
+The Auth0 SDK helps you retrieve the <a href="https://auth0.com/docs/users/concepts/overview-user-profile" target="_blank" rel="noreferrer">profile information</a> associated with logged-in users quickly in whatever component you need, such as their name or profile picture, to personalize the user interface. The profile information is available through the `user$` property exposed by `AuthService`.
 
 Create a new component `Profile`, and use the following code to display user profile information in your app.
 
@@ -244,5 +251,5 @@ export class ProfileComponent {
 ```
 
 :::panel Checkpoint
-Add `ProfileComponent` to your application, and verify that you can display the `user.name` or [any other `user` property](https://auth0.com/docs/users/references/user-profile-structure#user-profile-attributes) within a component correctly after you have logged in.
+Add `ProfileComponent` to your application, and verify that you can display the `user.name` or <a href="https://auth0.com/docs/users/references/user-profile-structure#user-profile-attributes" target="_blank" rel="noreferrer">any other `user` property</a> within a component correctly after you have logged in.
 :::
